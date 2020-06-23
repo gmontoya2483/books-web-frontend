@@ -13,7 +13,11 @@ import { PagesComponent } from './components/pages/pages.component';
 import { NovedadesComponent } from './components/pages/novedades/novedades.component';
 import { MuroComponent } from './components/pages/muro/muro.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-import { ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { VerificarEmailComponent } from './components/register/verificar-email/verificar-email.component';
+import {LoginGuardGuard} from './services/guards/login-guard.guard';
+
 
 @NgModule({
   declarations: [
@@ -27,12 +31,15 @@ import { ReactiveFormsModule} from '@angular/forms';
     PagesComponent,
     NovedadesComponent,
     MuroComponent,
-    FooterComponent
+    FooterComponent,
+    VerificarEmailComponent
   ],
     imports: [
       BrowserModule,
       AppRoutingModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      FormsModule,
+      HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]

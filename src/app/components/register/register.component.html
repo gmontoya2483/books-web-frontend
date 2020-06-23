@@ -9,7 +9,7 @@
               <h4 class="text-dark mb-4">Crear una cuenta</h4>
             </div>
 
-            <form [formGroup]="registroForm" (ngSubmit)="guardar()">
+            <form [formGroup]="registroForm" (ngSubmit)="guardarUsuario()">
 
               <div class="form-group row">
                 <!-- ============================================================== -->
@@ -18,9 +18,11 @@
                 <div class="col-sm-6 mb-3 mb-sm-0">
                   <input class="form-control"
                          type="text"
+                         name = "nombre"
                          placeholder="Nombre"
+                         required
                          formControlName="nombre"
-                         [class.is-invalid]="nombreNoValido"
+                         [class.is-invalid]="campoNoValido('nombre')"
                   >
                   <div class="invalid-feedback">
                     Ingrese un mínimo de 5 caracteres.
@@ -37,9 +39,9 @@
                   <input class="form-control"
                          type="text"
                          placeholder="Apellido"
-                         name="last_name"
+                         name="apellido"
                          formControlName="apellido"
-                         [class.is-invalid]="apellidoNoValido"
+                         [class.is-invalid]="campoNoValido('apellido')"
                   >
                   <div class="invalid-feedback">
                     Ingrese un mínimo de 5 caracteres.
@@ -56,9 +58,11 @@
               <div class="form-group">
                 <input class="form-control"
                        type="email"
+                       name ="email"
                        placeholder="Email"
+                       required
                        formControlName="email"
-                       [class.is-invalid]="emailNoValido"
+                       [class.is-invalid]="campoNoValido('email')"
                 >
                 <div class="invalid-feedback">
                   Ingrese un email válido.
@@ -76,12 +80,14 @@
                 <div class="col-sm-6 mb-3 mb-sm-0">
                   <input class="form-control"
                          type="password"
+                         name="password1"
+                         required
                          placeholder="Contraseña"
                          formControlName="password1"
-                         [class.is-invalid]="password1NoValido"
+                         [class.is-invalid]="campoNoValido('password1')"
                   >
                   <div class="invalid-feedback">
-                    Ingrese un mínimo de 5 caractéres.
+                    Ingrese un mínimo de 8 caractéres.
                   </div>
                 </div>
                 <!-- ============================================================== -->
@@ -94,6 +100,8 @@
                 <div class="col-sm-6">
                   <input class="form-control"
                          type="password"
+                         name="password2"
+                         required
                          placeholder="Repetir la contraseña"
                          formControlName="password2"
                          [class.is-invalid]="password2NoValido"
@@ -117,7 +125,7 @@
 
 
             <div class="text-center"><a class="small" href="forgot-password.html">¿Olvidó su contraseña?</a></div>
-            <div class="text-center"><a class="small" href="login.html">¿Ya tiene una cuenta? Ingresar!</a></div>
+            <div class="text-center"><a class="small" routerLink="/login">¿Ya tiene una cuenta? Ingresar!</a></div>
           </div>
         </div>
       </div>

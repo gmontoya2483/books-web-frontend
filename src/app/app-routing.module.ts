@@ -7,6 +7,8 @@ import {PagesComponent} from './components/pages/pages.component';
 import {DashboardComponent} from './components/pages/dashboard/dashboard.component';
 import {MuroComponent} from './components/pages/muro/muro.component';
 import {NovedadesComponent} from './components/pages/novedades/novedades.component';
+import {VerificarEmailComponent} from './components/register/verificar-email/verificar-email.component';
+import {LoginGuardGuard} from './services/guards/login-guard.guard';
 
 
 const routes: Routes = [
@@ -14,6 +16,7 @@ const routes: Routes = [
   {
     path: '',
     component: PagesComponent,
+    canActivate: [LoginGuardGuard ],
     children: [
       { path: 'muro', component: MuroComponent},
       { path: 'dashboard', component: DashboardComponent},
@@ -23,11 +26,12 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
+  { path: 'verificarEmail', component: VerificarEmailComponent},
   { path: '**', component: PagenotfoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash: true})],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
