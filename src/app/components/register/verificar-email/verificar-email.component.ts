@@ -20,6 +20,7 @@ export class VerificarEmailComponent implements OnInit {
               private router: Router,
               private authService: AuthService,
               private usuarioService: UsuarioService) {
+
     this.activatedRoute.queryParams.subscribe(params => {
       this.token = params.token;
     });

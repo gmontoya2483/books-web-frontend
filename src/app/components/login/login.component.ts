@@ -60,8 +60,6 @@ export class LoginComponent implements OnInit {
 
   ingresar( ) {
 
-    console.log(this.loginForm);
-
     if (this.loginForm.invalid){
       Object.values( this.loginForm.controls ).forEach( control => {
         control.markAsTouched();

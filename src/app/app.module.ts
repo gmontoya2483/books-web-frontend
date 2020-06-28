@@ -16,7 +16,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { VerificarEmailComponent } from './components/register/verificar-email/verificar-email.component';
-import {LoginGuardGuard} from './services/guards/login-guard.guard';
+import { CambiarPasswordComponent } from './components/login/cambiar-password/cambiar-password.component';
+import { ConfirmarCambioComponent } from './components/login/cambiar-password/confirmar-cambio.component';
 
 
 @NgModule({
@@ -32,7 +33,9 @@ import {LoginGuardGuard} from './services/guards/login-guard.guard';
     NovedadesComponent,
     MuroComponent,
     FooterComponent,
-    VerificarEmailComponent
+    VerificarEmailComponent,
+    CambiarPasswordComponent,
+    ConfirmarCambioComponent
   ],
     imports: [
       BrowserModule,

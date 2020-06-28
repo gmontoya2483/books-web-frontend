@@ -9,6 +9,8 @@ import {MuroComponent} from './components/pages/muro/muro.component';
 import {NovedadesComponent} from './components/pages/novedades/novedades.component';
 import {VerificarEmailComponent} from './components/register/verificar-email/verificar-email.component';
 import {LoginGuardGuard} from './services/guards/login-guard.guard';
+import {CambiarPasswordComponent} from './components/login/cambiar-password/cambiar-password.component';
+import {ConfirmarCambioComponent} from './components/login/cambiar-password/confirmar-cambio.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: LoginComponent },
+  { path: 'cambiarPassword', component: CambiarPasswordComponent },
+  { path: 'confirmarCambioPassword', component: ConfirmarCambioComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'verificarEmail', component: VerificarEmailComponent},
   { path: '**', component: PagenotfoundComponent}
