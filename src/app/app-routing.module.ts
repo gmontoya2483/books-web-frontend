@@ -11,6 +11,7 @@ import {VerificarEmailComponent} from './components/register/verificar-email/ver
 import {LoginGuardGuard} from './services/guards/login-guard.guard';
 import {CambiarPasswordComponent} from './components/login/cambiar-password/cambiar-password.component';
 import {ConfirmarCambioComponent} from './components/login/cambiar-password/confirmar-cambio.component';
+import {ProfileComponent} from './components/pages/profile/profile.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'muro', component: MuroComponent},
       { path: 'dashboard', component: DashboardComponent},
       { path: 'novedades', component: NovedadesComponent},
+      { path: 'profile', component: ProfileComponent},
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
     ]
   },

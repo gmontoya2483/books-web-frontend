@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UsuarioService} from '../../../services/usuario/usuario.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-cambiar-password',
@@ -15,7 +16,13 @@ export class CambiarPasswordComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private usuarioService: UsuarioService,
+              private authService: AuthService,
               private router: Router) {
+
+    if (this.authService.isUserAlreadyLoggedIn()){
+      this.router.navigate(['/dashboard']).then();
+    }
+
     this.crearFormulario();
   }
 

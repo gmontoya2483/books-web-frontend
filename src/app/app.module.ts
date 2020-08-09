@@ -18,6 +18,12 @@ import {HttpClientModule} from '@angular/common/http';
 import { VerificarEmailComponent } from './components/register/verificar-email/verificar-email.component';
 import { CambiarPasswordComponent } from './components/login/cambiar-password/cambiar-password.component';
 import { ConfirmarCambioComponent } from './components/login/cambiar-password/confirmar-cambio.component';
+import { ProfileComponent } from './components/pages/profile/profile.component';
+import { PhotoComponent } from './components/pages/profile/photo/photo.component';
+import { UserSettingsComponent } from './components/pages/profile/user-settings/user-settings.component';
+import { CommunityComponent } from './components/pages/profile/community/community.component';
+import { ImagePipe } from './pipes/image.pipe';
+
 
 
 @NgModule({
@@ -35,7 +41,12 @@ import { ConfirmarCambioComponent } from './components/login/cambiar-password/co
     FooterComponent,
     VerificarEmailComponent,
     CambiarPasswordComponent,
-    ConfirmarCambioComponent
+    ConfirmarCambioComponent,
+    ProfileComponent,
+    PhotoComponent,
+    UserSettingsComponent,
+    CommunityComponent,
+    ImagePipe
   ],
     imports: [
       BrowserModule,

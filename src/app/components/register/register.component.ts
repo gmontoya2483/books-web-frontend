@@ -5,6 +5,7 @@ import {UsuarioService} from '../../services/usuario/usuario.service';
 import {Usuario} from '../../models/ususario.model';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,13 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private validadores: ValidadoresService,
               private  usuarioService: UsuarioService,
+              private  authService: AuthService,
               private router: Router) {
+
+    if (this.authService.isUserAlreadyLoggedIn()){
+      this.router.navigate(['/dashboard']).then();
+    }
+
     this.crearFormulario();
   }
 

@@ -17,9 +17,12 @@ export class LoginComponent implements OnInit {
               private authService: AuthService,
               private router: Router) {
 
+    if (this.authService.isUserAlreadyLoggedIn()){
+      this.router.navigate(['/dashboard']).then();
+    }
+
     this.crearFormulario();
     this.cargarDataEnFormulario();
-
   }
 
   campoNoValido(campo: string){
@@ -72,11 +75,13 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.password,
       this.loginForm.value.recuerdame).subscribe((resp: any) => {
 
-        console.log(resp);
         this.router.navigate(['/dashboard']).then();
     });
-
   }
+
+
+
+
 
 
 }

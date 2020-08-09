@@ -6,6 +6,9 @@ export interface IUsuario {
   isAdmin?: boolean;
   password?: string;
   isValidated?: {value: boolean, validatedDateTime: Date };
+  img?: string;
+  paisResidencia?: {_id: string, name: string};
+  comunidad?: {_id: string, name: string};
 }
 
 export class Usuario {
@@ -17,6 +20,9 @@ export class Usuario {
   public password: string;
   public isAdmin: boolean;
   public isValidated: {value: boolean, validatedDateTime: Date };
+  img: string;
+  paisResidencia: {_id: string, name?: string};
+  comunidad: {_id: string, name?: string};
 
   constructor() {  }
 
@@ -31,6 +37,9 @@ export class Usuario {
     user.password = usuario.password || null;
     user.isAdmin = usuario.isAdmin || null;
     user.isValidated = usuario.isValidated || null;
+    user.img = usuario.img || null;
+    user.paisResidencia = usuario.paisResidencia || null;
+    user.comunidad = usuario.comunidad || null;
 
     return user;
   }

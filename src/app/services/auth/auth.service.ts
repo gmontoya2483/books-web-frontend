@@ -22,6 +22,20 @@ export class AuthService {
   }
 
 
+  public  getToken(): string | null {
+    const token = localStorage.getItem('token') || null;
+    if (!token){
+      Swal.fire({
+        title: 'Error',
+        text: `Token inválido o inexistente`,
+        icon: 'error'
+      }).then();
+      this.router.navigate(['/login']).then();
+      return null;
+    }
+    return token;
+  }
+
   public decodeJWT(token: string){
     try{
       return jwtDecode(token);
@@ -34,7 +48,7 @@ export class AuthService {
 
   public getAuthenticatedUser() {
 
-    const token = localStorage.getItem('token') || null;
+    const token = this.getToken();
     if (!token){
       return null;
     }
@@ -55,7 +69,6 @@ export class AuthService {
 
 
   public login( email: string, password: string , recordar: boolean = false ){
-
     if (recordar ){
       localStorage.setItem('email', email);
     } else {
@@ -85,5 +98,11 @@ export class AuthService {
       })
     );
 
+  }
+
+
+  isUserAlreadyLoggedIn(): boolean {
+    const token = localStorage.getItem('token') || null;
+    return !!token;
   }
 }

@@ -12,11 +12,16 @@ export class LoginGuardGuard implements CanActivate {
   }
   canActivate(): boolean {
 
-    console.log ( 'Paso por el login Guard');
-    if (!this.authService.getAuthenticatedUser()){
+    if (!this.authService.isUserAlreadyLoggedIn()){
       this.router.navigate(['/login']).then();
       return false;
     }
+
+    // console.log ( 'Paso por el login Guard');
+    // if (!this.authService.getAuthenticatedUser()){
+    //   this.router.navigate(['/login']).then();
+    //   return false;
+    // }
 
     return true;
   }
