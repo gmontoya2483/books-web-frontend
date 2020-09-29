@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Usuario} from '../../models/ususario.model';
 import {environment} from '../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
@@ -54,6 +54,7 @@ export class MeService {
           icon: 'error'
         }).then();
         this.me = null;
+        this.authService.logout();
         this.router.navigate(['/login']).then();
         return throwError(err);
       })
@@ -173,4 +174,40 @@ export class MeService {
     );
   }
 
+
+  getMyCommunityMembers(pageSize: number, page: number = 1){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    if (!this.me.comunidad){
+      Swal.fire({
+        title: 'Error',
+        text: `El usuario no esta registrado en ninguna comunidad.`,
+        icon: 'error'
+      }).then();
+      return null;
+    }
+
+    let params = new HttpParams();
+    params = params.append('page', String(page));
+    params = params.append('pageSize', String(pageSize));
+
+    return this.http.get( `${this.url}/community/members`, {headers: {'x-auth-token': token}, params}).pipe(
+      map((resp: any) => {
+        return resp.users;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion de los miembros de la comunidad: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
 }

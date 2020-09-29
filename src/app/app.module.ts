@@ -23,6 +23,9 @@ import { PhotoComponent } from './components/pages/profile/photo/photo.component
 import { UserSettingsComponent } from './components/pages/profile/user-settings/user-settings.component';
 import { CommunityComponent } from './components/pages/profile/community/community.component';
 import { ImagePipe } from './pipes/image.pipe';
+import { MiComunidadComponent } from './components/pages/mi-comunidad/mi-comunidad.component';
+import { ComunidadUsersComponent } from './components/pages/mi-comunidad/comunidad-users/comunidad-users.component';
+import { ComunidadBooksComponent } from './components/pages/mi-comunidad/comunidad-books/comunidad-books.component';
 
 
 
@@ -46,7 +49,10 @@ import { ImagePipe } from './pipes/image.pipe';
     PhotoComponent,
     UserSettingsComponent,
     CommunityComponent,
-    ImagePipe
+    ImagePipe,
+    MiComunidadComponent,
+    ComunidadUsersComponent,
+    ComunidadBooksComponent
   ],
     imports: [
       BrowserModule,
