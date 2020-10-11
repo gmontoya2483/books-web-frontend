@@ -212,6 +212,68 @@ export class MeService {
   }
 
 
+  followUser(user: Usuario){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    if (!this.me.comunidad){
+      Swal.fire({
+        title: 'Error',
+        text: `El usuario no esta registrado en ninguna comunidad.`,
+        icon: 'error'
+      }).then();
+      return null;
+    }
+
+    const body = {
+      followingUserId: user._id
+    };
+
+    return this.http.post( `${this.url}/following`, body, {headers: {'x-auth-token': token}}).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo solicitar seguir al usuario ${user.nombre} ${user.apellido}: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+
+  unFollowUser( user: Usuario){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    return this.http.delete( `${this.url}/following/${user._id}`,  {headers: {'x-auth-token': token}}).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo dejar de seguir  al usuario ${user.nombre} ${user.apellido}: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+
+  }
+
+
 
 
 

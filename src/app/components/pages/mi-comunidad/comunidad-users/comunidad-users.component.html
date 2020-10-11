@@ -1,6 +1,6 @@
 <div class="card shadow">
   <div class="card-header py-3">
-    <p class="text-primary m-0 font-weight-bold">Usuarios</p>
+    <p class="text-primary m-0 font-weight-bold">Miembros</p>
   </div>
   <div class="card-body">
     <div class="row">
@@ -32,7 +32,7 @@
 <!--          </tr>-->
 <!--        </thead>-->
         <tbody>
-        <tr *ngFor="let user of this.users">
+        <tr *ngFor="let user of this.members; index as i">
           <td>
             <img class="rounded-circle img-thumbnail  img-fluid mr-2"
                  width="60"
@@ -52,10 +52,10 @@
             </span>
 
 
-            <div *ngIf="!user.following" class="btn btn-outline-dark btn-sm mr-1">
+            <div *ngIf="!user.following" class="btn btn-outline-dark btn-sm mr-1" (click)="followUser( user, i )">
               <i class="fas fa-plus"></i> Seguir
             </div>
-            <div *ngIf="user.following" class="btn btn-outline-danger btn-sm mr-1">
+            <div *ngIf="user.following" class="btn btn-outline-danger btn-sm mr-1" (click)="unFollowUser(user, i)">
               <i class="far fa-trash-alt"></i> Eliminar
             </div>
           </td>

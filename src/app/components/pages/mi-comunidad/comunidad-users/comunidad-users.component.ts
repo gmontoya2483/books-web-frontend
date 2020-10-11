@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MeService} from '../../../../services/me/me.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-comunidad-users',
@@ -27,7 +28,7 @@ export class ComunidadUsersComponent implements OnInit {
       of: number
     }
   };
-  public users: [] = null;
+  public members: [] = null;
 
 
 
@@ -40,7 +41,6 @@ export class ComunidadUsersComponent implements OnInit {
 
 
   goToPage(page) {
-    console.log(page);
     this.getMembers(page);
   }
 
@@ -49,10 +49,55 @@ export class ComunidadUsersComponent implements OnInit {
     this.meService.getMyCommunityMembers(this.pageSize, page )
       .subscribe((resp: { pagination: any, users: [] }) => {
         this.pagination = resp.pagination;
-        this.users = resp.users;
-        console.log(this.users);
-        console.log(this.pagination);
+        this.members = resp.users;
         this.pageSize = this.pagination.pageSize;
       });
   }
+
+  followUser(user: any, i: number) {
+
+    this.meService.followUser(user).subscribe(( resp: any ) => {
+      if (!resp.ok){
+        Swal.fire({
+          title: 'Error',
+          text: `${ resp.mensaje }`,
+          icon: 'error'
+        }).then();
+      }
+
+      const follow = resp.follow;
+
+      // @ts-ignore
+      if (this.members[i]._id === follow.following){
+        // @ts-ignore
+        this.members[i].following = {_id: follow._id, isConfirmed: follow.isConfirmed};
+      }
+
+    });
+  }
+
+  unFollowUser(user: any, i: number) {
+
+    this.meService.unFollowUser(user).subscribe((resp: any) => {
+      if (!resp.ok){
+        Swal.fire({
+          title: 'Error',
+          text: `${ resp.mensaje }`,
+          icon: 'error'
+        }).then();
+      }
+
+      const following = resp.following.following;
+
+      // @ts-ignore
+      if (this.members[i]._id === following._id){
+        // @ts-ignore
+        this.members[i].following = null;
+      }
+
+    });
+
+  }
+
+
 }
