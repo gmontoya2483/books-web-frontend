@@ -100,4 +100,50 @@ export class ComunidadUsersComponent implements OnInit {
   }
 
 
+  confirmfollower(user: any, i: number) {
+    this.meService.confirmFollower(user).subscribe(( resp: any ) => {
+
+      if (!resp.ok){
+        Swal.fire({
+          title: 'Error',
+          text: `${ resp.mensaje }`,
+          icon: 'error'
+        }).then();
+      }
+
+      const follow = resp.follower;
+
+       // @ts-ignore
+      if (this.members[i]._id === follow.follower._id){
+         // @ts-ignore
+        this.members[i].follower = {_id: follow._id, isConfirmed: follow.isConfirmed};
+       }
+    });
+
+
+  }
+
+  deleteFollower(user: any, i: number) {
+
+    this.meService.deleteFollower( user ).subscribe( (resp: any) => {
+
+      if (!resp.ok){
+        Swal.fire({
+          title: 'Error',
+          text: `${ resp.mensaje }`,
+          icon: 'error'
+        }).then();
+      }
+
+      const follow = resp.follower;
+
+      // @ts-ignore
+      if (this.members[i]._id === follow.follower._id){
+        // @ts-ignore
+        this.members[i].follower = null;
+      }
+
+    });
+
+  }
 }

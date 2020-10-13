@@ -24,19 +24,19 @@
     <div class="table-responsive table mt-2"  role="grid" aria-describedby="dataTable_info">
       <table class="table my-0" id="dataTable">
 
-<!--        <thead>-->
-<!--          <tr>-->
-<!--            <th>Nombre</th>-->
-<!--            <th>Te sigue</th>-->
-<!--            <th>Siguiendo</th>-->
-<!--          </tr>-->
-<!--        </thead>-->
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Seguir</th>
+            <th>Te sigue</th>
+          </tr>
+        </thead>
         <tbody>
         <tr *ngFor="let user of this.members; index as i">
           <td>
-            <img class="rounded-circle img-thumbnail  img-fluid mr-2"
-                 width="60"
-                 height="60"
+            <img class="rounded-circle mr-2"
+                 width="40"
+                 height="40"
                  [alt]="user.nombre +' '+user.apellido"
                  [src]="user.img | image: 'users'"
             >
@@ -45,33 +45,50 @@
 
           <!-- Siguiendo-->
           <td>
-
-            <span *ngIf="user.following">
-              <span *ngIf="user.following.isConfirmed.value" class="badge badge-pill badge-dark mr-1">Siguiendo</span>
-              <span *ngIf="!user.following.isConfirmed.value" class="badge badge-pill badge-secondary mr-1">Solicitud enviada</span>
-            </span>
-
-
-            <div *ngIf="!user.following" class="btn btn-outline-dark btn-sm mr-1" (click)="followUser( user, i )">
-              <i class="fas fa-plus"></i> Seguir
-            </div>
-            <div *ngIf="user.following" class="btn btn-outline-danger btn-sm mr-1" (click)="unFollowUser(user, i)">
-              <i class="far fa-trash-alt"></i> Eliminar
+            <div class="row">
+              <div class="col">
+                <div  *ngIf="user.following">
+                  <span *ngIf="user.following.isConfirmed.value" class="badge badge-pill badge-success mr-1">Siguiendo</span>
+                  <span *ngIf="!user.following.isConfirmed.value" class="badge badge-pill badge-secondary mr-1">Solicitud Enviada</span>
+                </div>
+                <div *ngIf="!user.following" class="btn btn-outline-dark btn-sm mr-1" (click)="followUser( user, i )">
+                  <i class="fas fa-plus"></i>
+                </div>
+                <div *ngIf="user.following" class="btn btn-outline-danger btn-sm mr-1" (click)="unFollowUser(user, i)">
+                  <i class="far fa-trash-alt"></i>
+                </div>
+              </div>
             </div>
           </td>
 
           <!-- Fin Siguiendo-->
 
-
+          <!-- Seguido por -->
           <td>
-            <span class="badge badge-pill badge-primary mr-1">Te sigue</span>
-            <div class="btn btn-outline-success btn-sm mr-1">
-              <i class="fas fa-check"></i> Confirmar
+            <div class="row">
+              <div class="col">
+                <div *ngIf="user.follower">
+                  <span *ngIf="user.follower.isConfirmed.value" class="badge badge-pill badge-success mr-1">Te sigue</span>
+                  <span *ngIf="!user.follower.isConfirmed.value" class="badge badge-pill badge-secondary mr-1">Solicitó seguirte</span>
+                </div>
+
+                <div *ngIf="user.follower">
+                  <div *ngIf="!user.follower.isConfirmed.value" class="btn btn-outline-success btn-sm mr-1" (click)="confirmfollower( user, i )">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="btn btn-outline-danger btn-sm mr-1" (click)="deleteFollower(user, i)">
+                    <i class="far fa-trash-alt"></i>
+                  </div>
+
+                </div>
+              </div>
             </div>
-            <div class="btn btn-outline-danger btn-sm mr-1">
-              <i class="far fa-trash-alt"></i> Eliminar
-            </div>
+
           </td>
+
+          <!-- Fin Seguido por -->
+
+
         </tr>
 
         </tbody>
@@ -83,17 +100,17 @@
 
 
 
-<!--    -->
-<!--    -->
+
+
 <!--    <div class="mt-3 row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-4">-->
-<!--      <div *ngFor="let user of this.users" class="col mb-4">-->
+<!--      <div *ngFor="let user of this.members; index as i" class="col mb-4">-->
 <!--        <div class="card text-center">-->
 
 <!--          <div class="card-header">-->
 
 <!--            <div class="row mb-2">-->
 <!--              <div class="col">-->
-<!--                <img  class="img-thumbnail img-fluid rounded-circle" width="100" height="100" [alt]="user.nombre +' '+user.apellido" [src]="user.img | image: 'users'">-->
+<!--                <img  class="img-thumbnail img-fluid rounded-circle"  width="100" height="100" [alt]="user.nombre +' '+user.apellido" [src]="user.img | image: 'users'">-->
 <!--              </div>-->
 <!--            </div>-->
 
@@ -104,9 +121,9 @@
 <!--            </div>-->
 
 <!--          </div>-->
-<!--          -->
+
 <!--          <div class="card-body">-->
-<!--            -->
+
 
 <!--            <div class="row mb-2 align-content-around">-->
 <!--              <div class="col">-->
@@ -137,7 +154,7 @@
 <!--              </div>-->
 <!--            </div>-->
 
-<!--            -->
+
 <!--          </div>-->
 <!--        </div>-->
 <!--      </div>-->

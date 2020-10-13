@@ -270,6 +270,56 @@ export class MeService {
         return throwError(err);
       })
     );
+  }
+
+
+
+
+  confirmFollower( user: Usuario ){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    return this.http.put( `${this.url}/followers/${user._id}/confirm`, {}, {headers: {'x-auth-token': token}}).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo confirmar la solicitud de seguimiento del usuario ${user.nombre} ${user.apellido}: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+  deleteFollower( user: Usuario ){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    return this.http.delete( `${this.url}/followers/${user._id}`,  {headers: {'x-auth-token': token}}).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo eliminar al usuario ${user.nombre} ${user.apellido} de tus seguidores: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+
 
   }
 
