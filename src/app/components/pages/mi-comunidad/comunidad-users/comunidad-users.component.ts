@@ -13,8 +13,8 @@ import Swal from 'sweetalert2';
 
 export class ComunidadUsersComponent implements OnInit {
 
-
   public pageSize = 25;
+  public search = '';
   public pagination: {
     previousPage: number,
     currentPage: number,
@@ -44,9 +44,20 @@ export class ComunidadUsersComponent implements OnInit {
     this.getMembers(page);
   }
 
+  searchMember() {
+    this.getMembers();
+  }
+
+  changePageSize() {
+    this.getMembers();
+  }
+
 
   getMembers(page = 1) {
-    this.meService.getMyCommunityMembers(this.pageSize, page )
+    if (this.search.length < 3){
+      this.search =  '';
+    }
+    this.meService.getMyCommunityMembers(this.pageSize, page, this.search )
       .subscribe((resp: { pagination: any, users: [] }) => {
         this.pagination = resp.pagination;
         this.members = resp.users;
@@ -146,4 +157,5 @@ export class ComunidadUsersComponent implements OnInit {
     });
 
   }
+
 }

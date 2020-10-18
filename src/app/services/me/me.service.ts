@@ -175,7 +175,7 @@ export class MeService {
   }
 
 
-  getMyCommunityMembers(pageSize: number, page: number = 1){
+  getMyCommunityMembers(pageSize: number, page: number = 1, search: string = null){
 
     const token = this.authService.getToken();
     if (!token){
@@ -195,6 +195,9 @@ export class MeService {
     let params = new HttpParams();
     params = params.append('page', String(page));
     params = params.append('pageSize', String(pageSize));
+    if (search) {
+      params = params.append('search', search);
+    }
 
     return this.http.get( `${this.url}/community/members`, {headers: {'x-auth-token': token}, params}).pipe(
       map((resp: any) => {
