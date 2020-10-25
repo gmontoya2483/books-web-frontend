@@ -15,17 +15,34 @@
 
       <hr class="sidebar-divider my-0">
 
-
+      <!-- Menu mi comunidad-->
       <li *ngIf="this.meService.me.comunidad" class="nav-item"  role="presentation" >
-
         <a class="nav-link"  routerLinkActive="active" [routerLink]="['/comunidad']" routerLinkActive="active" >
           <i class="fas fa-hands-helping"></i><span>Mi comunidad</span>
         </a>
-
         <div class="container-fluid">
           <ul class="nav navbar-nav text-light">
             <li class="nav-item" role="presentation"><a class="nav-link" routerLinkActive="active" [routerLink]="['/comunidad', 'users']"><i class="fas fa-users"></i><span>Miembros</span></a></li>
             <li class="nav-item" role="presentation"><a class="nav-link"  routerLinkActive="active" [routerLink]="['/comunidad', 'books']"><i class="fas fa-book"></i><span>Libros</span></a></li>
+          </ul>
+        </div>
+      </li>
+      <!-- Fin Menu mi comunidad-->
+
+      <hr class="sidebar-divider my-0">
+
+
+
+      <li *ngIf="this.meService.me.comunidad" class="nav-item"  role="presentation" >
+
+        <a class="nav-link"  routerLinkActive="active" [routerLink]="['/amigos']" routerLinkActive="active" >
+          <i class="fas fa-users"></i><span>Mis Amigos</span>
+        </a>
+
+        <div class="container-fluid">
+          <ul class="nav navbar-nav text-light">
+            <li class="nav-item" role="presentation"><a class="nav-link" routerLinkActive="active" [routerLink]="['/amigos', 'following']"><span>Siguiendo</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link"  routerLinkActive="active" [routerLink]="['/amigos', 'followers']"><span>Te siguen</span></a></li>
           </ul>
 
         </div>
@@ -33,6 +50,10 @@
       </li>
 
       <hr class="sidebar-divider my-0">
+
+
+
+
 
 
 

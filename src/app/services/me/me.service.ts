@@ -322,15 +322,60 @@ export class MeService {
         return throwError(err);
       })
     );
+  }
 
+  getFollowing(pageSize: number, page: number = 1){
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    let params = new HttpParams();
+    params = params.append('page', String(page));
+    params = params.append('pageSize', String(pageSize));
+
+    return this.http.get( `${this.url}/following`, {headers: {'x-auth-token': token}, params}).pipe(
+      map((resp: any) => {
+        return resp.followings;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion de los amigos que sigues: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
 
   }
 
+  getFollowers(pageSize: number, page: number = 1){
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
 
+    let params = new HttpParams();
+    params = params.append('page', String(page));
+    params = params.append('pageSize', String(pageSize));
 
+    return this.http.get( `${this.url}/followers`, {headers: {'x-auth-token': token}, params}).pipe(
+      map((resp: any) => {
+        return resp.followers;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion de los amigos que te siguen: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
 
-
-
-
+  }
 
 }
