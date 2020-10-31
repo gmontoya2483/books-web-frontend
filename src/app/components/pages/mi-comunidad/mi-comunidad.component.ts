@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import {MeService} from '../../../services/me/me.service';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
+  selector: 'app-mi-comunidad',
+  templateUrl: './mi-comunidad.component.html',
   styles: [
   ]
 })
-export class SidebarComponent implements OnInit {
+export class MiComunidadComponent implements OnInit {
 
   constructor(public meService: MeService) {
     this.meService.getMe().subscribe((resp: any ) => {  });
   }
-
 
   ngOnInit(): void {
   }

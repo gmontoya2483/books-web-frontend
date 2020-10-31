@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Usuario} from '../../models/ususario.model';
 import {environment} from '../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
@@ -54,6 +54,7 @@ export class MeService {
           icon: 'error'
         }).then();
         this.me = null;
+        this.authService.logout();
         this.router.navigate(['/login']).then();
         return throwError(err);
       })
@@ -171,6 +172,210 @@ export class MeService {
         localStorage.setItem('token', resp.token);
       }
     );
+  }
+
+
+  getMyCommunityMembers(pageSize: number, page: number = 1, search: string = null){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    if (!this.me.comunidad){
+      Swal.fire({
+        title: 'Error',
+        text: `El usuario no esta registrado en ninguna comunidad.`,
+        icon: 'error'
+      }).then();
+      return null;
+    }
+
+    let params = new HttpParams();
+    params = params.append('page', String(page));
+    params = params.append('pageSize', String(pageSize));
+    if (search) {
+      params = params.append('search', search);
+    }
+
+    return this.http.get( `${this.url}/community/members`, {headers: {'x-auth-token': token}, params}).pipe(
+      map((resp: any) => {
+        return resp.users;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion de los miembros de la comunidad: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+
+  followUser(user: Usuario){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    if (!this.me.comunidad){
+      Swal.fire({
+        title: 'Error',
+        text: `El usuario no esta registrado en ninguna comunidad.`,
+        icon: 'error'
+      }).then();
+      return null;
+    }
+
+    const body = {
+      followingUserId: user._id
+    };
+
+    return this.http.post( `${this.url}/following`, body, {headers: {'x-auth-token': token}}).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo solicitar seguir al usuario ${user.nombre} ${user.apellido}: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+
+  unFollowUser( user: Usuario){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    return this.http.delete( `${this.url}/following/${user._id}`,  {headers: {'x-auth-token': token}}).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo dejar de seguir  al usuario ${user.nombre} ${user.apellido}: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+
+
+
+  confirmFollower( user: Usuario ){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    return this.http.put( `${this.url}/followers/${user._id}/confirm`, {}, {headers: {'x-auth-token': token}}).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo confirmar la solicitud de seguimiento del usuario ${user.nombre} ${user.apellido}: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+  deleteFollower( user: Usuario ){
+
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    return this.http.delete( `${this.url}/followers/${user._id}`,  {headers: {'x-auth-token': token}}).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo eliminar al usuario ${user.nombre} ${user.apellido} de tus seguidores: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+  getFollowing(pageSize: number, page: number = 1){
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    let params = new HttpParams();
+    params = params.append('page', String(page));
+    params = params.append('pageSize', String(pageSize));
+
+    return this.http.get( `${this.url}/following`, {headers: {'x-auth-token': token}, params}).pipe(
+      map((resp: any) => {
+        return resp.followings;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion de los amigos que sigues: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+
+  }
+
+  getFollowers(pageSize: number, page: number = 1){
+    const token = this.authService.getToken();
+    if (!token){
+      this.me = null;
+      return null;
+    }
+
+    let params = new HttpParams();
+    params = params.append('page', String(page));
+    params = params.append('pageSize', String(pageSize));
+
+    return this.http.get( `${this.url}/followers`, {headers: {'x-auth-token': token}, params}).pipe(
+      map((resp: any) => {
+        return resp.followers;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion de los amigos que te siguen: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+
   }
 
 }

@@ -12,6 +12,12 @@ import {LoginGuardGuard} from './services/guards/login-guard.guard';
 import {CambiarPasswordComponent} from './components/login/cambiar-password/cambiar-password.component';
 import {ConfirmarCambioComponent} from './components/login/cambiar-password/confirmar-cambio.component';
 import {ProfileComponent} from './components/pages/profile/profile.component';
+import {MiComunidadComponent} from './components/pages/mi-comunidad/mi-comunidad.component';
+import {ComunidadUsersComponent} from './components/pages/mi-comunidad/comunidad-users/comunidad-users.component';
+import {ComunidadBooksComponent} from './components/pages/mi-comunidad/comunidad-books/comunidad-books.component';
+import {MisAmigosComponent} from './components/pages/mis-amigos/mis-amigos.component';
+import {AmigosFollowingComponent} from './components/pages/mis-amigos/amigos-following/amigos-following.component';
+import {AmigosFollowerComponent} from './components/pages/mis-amigos/amigos-follower/amigos-follower.component';
 
 
 const routes: Routes = [
@@ -23,6 +29,24 @@ const routes: Routes = [
     children: [
       { path: 'muro', component: MuroComponent},
       { path: 'dashboard', component: DashboardComponent},
+      {
+        path: 'comunidad',
+        component: MiComunidadComponent,
+        children: [
+          {path: 'users', component: ComunidadUsersComponent},
+          {path: 'books', component: ComunidadBooksComponent},
+          {path: '', redirectTo: '/comunidad/users', pathMatch: 'full'},
+        ]
+      },
+      {
+        path: 'amigos',
+        component: MisAmigosComponent,
+        children: [
+          {path: 'following', component: AmigosFollowingComponent},
+          {path: 'followers', component: AmigosFollowerComponent},
+          {path: '', redirectTo: '/amigos/following', pathMatch: 'full'},
+        ]
+      },
       { path: 'novedades', component: NovedadesComponent},
       { path: 'profile', component: ProfileComponent},
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
