@@ -15,6 +15,34 @@
 
       <hr class="sidebar-divider my-0">
 
+      <!-- Menu Biblioteca-->
+      <li *ngIf="this.meService.me.comunidad" class="nav-item"  role="presentation" >
+        <a class="nav-link"  routerLinkActive="active" [routerLink]="['/biblioteca']" routerLinkActive="active" >
+          <i class="fas fa-table"></i><span>Biblioteca</span>
+        </a>
+        <div class="container-fluid">
+          <ul class="nav navbar-nav text-light">
+
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/biblioteca', 'books']">
+                <i class="fas fa-atlas"></i><span>Todos los Libros</span>
+              </a>
+            </li>
+
+            <li class="nav-item" role="presentation">
+              <a class="nav-link"  routerLinkActive="active" [routerLink]="['/biblioteca', 'authors']">
+                <i class="fas fa-pen-fancy"></i><span>Autores</span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </li>
+      <!-- Fin Menu mi comunidad-->
+
+      <hr class="sidebar-divider my-0">
+
+
       <!-- Menu mi comunidad-->
       <li *ngIf="this.meService.me.comunidad" class="nav-item"  role="presentation" >
         <a class="nav-link"  routerLinkActive="active" [routerLink]="['/comunidad']" routerLinkActive="active" >

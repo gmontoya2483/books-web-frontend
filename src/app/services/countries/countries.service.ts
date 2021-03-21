@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
 import {Country} from '../../models/country.model';
 import {throwError} from 'rxjs';
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../../auth/services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'

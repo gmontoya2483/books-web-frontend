@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UsuarioService} from '../../../services/usuario/usuario.service';
+import {UsuarioService} from '../../../../services/usuario/usuario.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-cambiar-password',
   templateUrl: './cambiar-password.component.html',
-  styleUrls: ['../login.component.css'
+  styles: [
+    `
+      .login_container {
+        max-width: 500px;
+      }
+    `
   ]
 })
 export class CambiarPasswordComponent implements OnInit {
@@ -48,7 +53,7 @@ export class CambiarPasswordComponent implements OnInit {
 
     this.usuarioService.requestChangePassword(this.changePasswordForm.value.email).subscribe(
       (resp: any) => {
-        this.router.navigate(['/login']).then();
+        this.router.navigate(['/auth/login']).then();
 
       }
     );

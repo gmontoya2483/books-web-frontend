@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth.service';
-import {Usuario} from '../../../models/ususario.model';
-import Swal from "sweetalert2";
-import {UsuarioService} from '../../../services/usuario/usuario.service';
+import {Usuario} from '../../../../models/ususario.model';
+import Swal from 'sweetalert2';
+import {UsuarioService} from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-verificar-email',
@@ -32,7 +32,7 @@ export class VerificarEmailComponent implements OnInit {
         text: `No fue posible leer la información del token.`,
         icon: 'error'
       }).then();
-      this.router.navigate(['/login']).then();
+      this.router.navigate(['/auth/login']).then();
     }
 
 
@@ -45,7 +45,7 @@ export class VerificarEmailComponent implements OnInit {
 
     this.usuarioService.validateEmail(this.token).subscribe(
       (resp: any) => {
-        this.router.navigate(['/login']).then();
+        this.router.navigate(['/auth/login']).then();
       }
     );
 

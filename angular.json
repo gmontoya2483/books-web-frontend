@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["jwt-decode"],
             "outputPath": "dist/booksfrontend",
             "index": "src/index.html",
             "main": "src/main.ts",

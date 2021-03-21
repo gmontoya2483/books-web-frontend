@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ValidadoresService} from '../../../services/validadores.service';
-import {Usuario} from '../../../models/ususario.model';
+import {ValidadoresService} from '../../../services/validadores/validadores.service';
+import {Usuario} from '../../../../models/ususario.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 import {AuthService} from '../../../services/auth/auth.service';
-import {UsuarioService} from '../../../services/usuario/usuario.service';
+import {UsuarioService} from '../../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-confirmar-cambio',
   templateUrl: './confirmar-cambio.component.html',
-  styleUrls: ['../login.component.css'
+  styles: [
+    `
+      .login_container {
+        max-width: 500px;
+      }
+    `
   ]
 })
 export class ConfirmarCambioComponent implements OnInit {
@@ -59,7 +64,7 @@ export class ConfirmarCambioComponent implements OnInit {
         text: `No fue posible leer la información del token.`,
         icon: 'error'
       }).then();
-      this.router.navigate(['/login']).then();
+      this.router.navigate(['/auth/login']).then();
     }
   }
 
@@ -90,7 +95,7 @@ export class ConfirmarCambioComponent implements OnInit {
 
     this.usuarioService.changePassword(this.token, this.confirmPasswordForm.value.password1).subscribe(
       (resp: any) => {
-        this.router.navigate(['/login']).then();
+        this.router.navigate(['/auth/login']).then();
       }
     );
 

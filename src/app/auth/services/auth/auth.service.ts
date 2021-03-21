@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Usuario} from '../../models/ususario.model';
+import {Usuario} from '../../../models/ususario.model';
 import Swal from 'sweetalert2';
 import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
@@ -30,7 +30,7 @@ export class AuthService {
         text: `Token inválido o inexistente`,
         icon: 'error'
       }).then();
-      this.router.navigate(['/login']).then();
+      this.router.navigate(['/auth/login']).then();
       return null;
     }
     return token;
@@ -63,7 +63,7 @@ export class AuthService {
 
   public logout(){
     localStorage.removeItem('token');
-    this.router.navigate(['/login']).then();
+    this.router.navigate(['/auth/login']).then();
 
   }
 
@@ -76,7 +76,7 @@ export class AuthService {
     }
 
     // @ts-ignore
-    return this.http.post(this.url, { email: email, password: password } ).pipe(
+    return this.http.post(this.url, { email, password } ).pipe(
       map( (resp: any ) => {
         const usuario = this.decodeJWT(resp.token);
         if (!usuario){

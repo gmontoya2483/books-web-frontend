@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../../auth/services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'

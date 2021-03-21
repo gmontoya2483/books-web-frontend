@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {LoginComponent} from './components/login/login.component';
-import {RegisterComponent} from './components/register/register.component';
+
 import {PagenotfoundComponent} from './components/shared/pagenotfound/pagenotfound.component';
 import {PagesComponent} from './components/pages/pages.component';
 import {DashboardComponent} from './components/pages/dashboard/dashboard.component';
 import {MuroComponent} from './components/pages/muro/muro.component';
 import {NovedadesComponent} from './components/pages/novedades/novedades.component';
-import {VerificarEmailComponent} from './components/register/verificar-email/verificar-email.component';
-import {LoginGuardGuard} from './services/guards/login-guard.guard';
-import {CambiarPasswordComponent} from './components/login/cambiar-password/cambiar-password.component';
-import {ConfirmarCambioComponent} from './components/login/cambiar-password/confirmar-cambio.component';
+
+import {LoginGuardGuard} from './auth/guards/login-guard.guard';
+
 import {ProfileComponent} from './components/pages/profile/profile.component';
 import {MiComunidadComponent} from './components/pages/mi-comunidad/mi-comunidad.component';
 import {ComunidadUsersComponent} from './components/pages/mi-comunidad/comunidad-users/comunidad-users.component';
@@ -18,6 +16,8 @@ import {ComunidadBooksComponent} from './components/pages/mi-comunidad/comunidad
 import {MisAmigosComponent} from './components/pages/mis-amigos/mis-amigos.component';
 import {AmigosFollowingComponent} from './components/pages/mis-amigos/amigos-following/amigos-following.component';
 import {AmigosFollowerComponent} from './components/pages/mis-amigos/amigos-follower/amigos-follower.component';
+import {BibliotecaBooksComponent} from './components/pages/biblioteca/biblioteca-books/biblioteca-books.component';
+import {BibliotecaAutoresComponent} from './components/pages/biblioteca/biblioteca-autores/biblioteca-autores.component';
 
 
 const routes: Routes = [
@@ -29,6 +29,15 @@ const routes: Routes = [
     children: [
       { path: 'muro', component: MuroComponent},
       { path: 'dashboard', component: DashboardComponent},
+      {
+        path: 'biblioteca',
+        component: MiComunidadComponent,
+        children: [
+          {path: 'books', component: BibliotecaBooksComponent},
+          {path: 'authors', component: BibliotecaAutoresComponent},
+          {path: '', redirectTo: '/biblioteca/books', pathMatch: 'full'},
+        ]
+      },
       {
         path: 'comunidad',
         component: MiComunidadComponent,
@@ -52,11 +61,10 @@ const routes: Routes = [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
     ]
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'cambiarPassword', component: CambiarPasswordComponent },
-  { path: 'confirmarCambioPassword', component: ConfirmarCambioComponent },
-  { path: 'register', component: RegisterComponent},
-  { path: 'verificarEmail', component: VerificarEmailComponent},
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)
+  },
   { path: '**', component: PagenotfoundComponent}
 ];
 

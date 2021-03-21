@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../../services/auth/auth.service';
+import {AuthService} from '../../../auth/services/auth/auth.service';
 import {Usuario} from '../../../models/ususario.model';
 import {MeService} from '../../../services/me/me.service';
 
@@ -10,7 +10,7 @@ import {MeService} from '../../../services/me/me.service';
 })
 export class HeaderComponent implements OnInit {
 
-  //usuario: Usuario;
+  // usuario: Usuario;
 
   constructor(private authService: AuthService, public meService: MeService) {
     this.meService.getMe().subscribe((resp: any ) => {  });

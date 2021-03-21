@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, NgForm, NgModel, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'
+  styles: [
+    `
+      .login_container {
+        max-width: 500px;
+      }
+    `
   ]
 })
 export class LoginComponent implements OnInit {
@@ -61,7 +67,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ingresar( ) {
+  ingresar(): void {
 
     if (this.loginForm.invalid){
       Object.values( this.loginForm.controls ).forEach( control => {
@@ -75,13 +81,8 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.password,
       this.loginForm.value.recuerdame).subscribe((resp: any) => {
 
-        this.router.navigate(['/dashboard']).then();
+      this.router.navigate(['/dashboard']).then();
     });
   }
-
-
-
-
-
 
 }

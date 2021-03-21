@@ -1,33 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ValidadoresService} from '../../services/validadores.service';
-import {UsuarioService} from '../../services/usuario/usuario.service';
-import {Usuario} from '../../models/ususario.model';
-import {Router} from '@angular/router';
-import Swal from 'sweetalert2';
+import {ValidadoresService} from '../../services/validadores/validadores.service';
+import {UsuarioService} from '../../../services/usuario/usuario.service';
 import {AuthService} from '../../services/auth/auth.service';
+import {Router} from '@angular/router';
+import {Usuario} from '../../../models/ususario.model';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: [
-    './register.component.css'
+  styles: [
+    `
+      .register_container {
+        max-width: 600px;
+      }
+    `
   ]
 })
 export class RegisterComponent implements OnInit {
+
   registroForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private validadores: ValidadoresService,
-              private  usuarioService: UsuarioService,
-              private  authService: AuthService,
-              private router: Router) {
+  constructor( private fb: FormBuilder,
+               private validadores: ValidadoresService,
+               private usuarioService: UsuarioService,
+               private authService: AuthService,
+               private router: Router) {
 
     if (this.authService.isUserAlreadyLoggedIn()){
       this.router.navigate(['/dashboard']).then();
     }
 
     this.crearFormulario();
+
   }
 
   ngOnInit(): void {
@@ -85,7 +90,7 @@ export class RegisterComponent implements OnInit {
 
     this.usuarioService.createUser( usuario )
       .subscribe(
-        (resp: any ) => { this.router.navigate(['/login']).then(r => { return; }); }
+        (resp: any ) => { this.router.navigate(['/auth/login']).then(r => { return; }); }
       );
   }
 

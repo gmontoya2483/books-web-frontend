@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+
 import { HeaderComponent } from './components/shared/header/header.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
 import { PagenotfoundComponent } from './components/shared/pagenotfound/pagenotfound.component';
@@ -13,11 +14,7 @@ import { PagesComponent } from './components/pages/pages.component';
 import { NovedadesComponent } from './components/pages/novedades/novedades.component';
 import { MuroComponent } from './components/pages/muro/muro.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import { VerificarEmailComponent } from './components/register/verificar-email/verificar-email.component';
-import { CambiarPasswordComponent } from './components/login/cambiar-password/cambiar-password.component';
-import { ConfirmarCambioComponent } from './components/login/cambiar-password/confirmar-cambio.component';
+
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { PhotoComponent } from './components/pages/profile/photo/photo.component';
 import { UserSettingsComponent } from './components/pages/profile/user-settings/user-settings.component';
@@ -29,14 +26,15 @@ import { ComunidadBooksComponent } from './components/pages/mi-comunidad/comunid
 import { MisAmigosComponent } from './components/pages/mis-amigos/mis-amigos.component';
 import { AmigosFollowingComponent } from './components/pages/mis-amigos/amigos-following/amigos-following.component';
 import { AmigosFollowerComponent } from './components/pages/mis-amigos/amigos-follower/amigos-follower.component';
+import { BibliotecaComponent } from './components/pages/biblioteca/biblioteca.component';
+import { BibliotecaBooksComponent } from './components/pages/biblioteca/biblioteca-books/biblioteca-books.component';
+import { BibliotecaAutoresComponent } from './components/pages/biblioteca/biblioteca-autores/biblioteca-autores.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     HeaderComponent,
     SidebarComponent,
     PagenotfoundComponent,
@@ -45,9 +43,6 @@ import { AmigosFollowerComponent } from './components/pages/mis-amigos/amigos-fo
     NovedadesComponent,
     MuroComponent,
     FooterComponent,
-    VerificarEmailComponent,
-    CambiarPasswordComponent,
-    ConfirmarCambioComponent,
     ProfileComponent,
     PhotoComponent,
     UserSettingsComponent,
@@ -58,7 +53,10 @@ import { AmigosFollowerComponent } from './components/pages/mis-amigos/amigos-fo
     ComunidadBooksComponent,
     MisAmigosComponent,
     AmigosFollowingComponent,
-    AmigosFollowerComponent
+    AmigosFollowerComponent,
+    BibliotecaComponent,
+    BibliotecaBooksComponent,
+    BibliotecaAutoresComponent
   ],
     imports: [
       BrowserModule,

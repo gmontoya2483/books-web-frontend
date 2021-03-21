@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../../auth/services/auth/auth.service';
 import {CountriesService} from '../countries/countries.service';
 import {FileUploadService} from '../file-upload/file-upload.service';
 
