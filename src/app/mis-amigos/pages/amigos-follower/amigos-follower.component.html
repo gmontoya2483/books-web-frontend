@@ -43,7 +43,7 @@
                  width="40"
                  height="40"
                  [alt]="user.follower.nombre +' '+user.follower.apellido"
-                 [src]="user.follower.img | image: 'users'"
+                 [src]="user.follower.img | newImage : 'users'"
             >
             {{user.follower.nombre}} {{user.follower.apellido}}
           </td>

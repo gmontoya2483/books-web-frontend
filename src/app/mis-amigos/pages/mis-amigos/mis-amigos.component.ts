@@ -9,7 +9,7 @@ import {MeService} from '../../../services/me/me.service';
 })
 export class MisAmigosComponent implements OnInit {
 
-  constructor(public meService: MeService) {
+  constructor( public meService: MeService) {
     this.meService.getMe().subscribe((resp: any ) => {  });
   }
 

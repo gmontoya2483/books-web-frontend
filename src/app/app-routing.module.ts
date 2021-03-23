@@ -11,12 +11,6 @@ import {LoginGuardGuard} from './auth/guards/login-guard.guard';
 
 import {ProfileComponent} from './components/pages/profile/profile.component';
 
-import {MisAmigosComponent} from './components/pages/mis-amigos/mis-amigos.component';
-import {AmigosFollowingComponent} from './components/pages/mis-amigos/amigos-following/amigos-following.component';
-import {AmigosFollowerComponent} from './components/pages/mis-amigos/amigos-follower/amigos-follower.component';
-import {BibliotecaBooksComponent} from './biblioteca/pages/biblioteca-books/biblioteca-books.component';
-import {BibliotecaAutoresComponent} from './biblioteca/pages/biblioteca-autores/biblioteca-autores.component';
-
 
 const routes: Routes = [
 
@@ -37,12 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'amigos',
-        component: MisAmigosComponent,
-        children: [
-          {path: 'following', component: AmigosFollowingComponent},
-          {path: 'followers', component: AmigosFollowerComponent},
-          {path: '', redirectTo: '/amigos/following', pathMatch: 'full'},
-        ]
+        loadChildren: () => import('./mis-amigos/mis-amigos.module').then(m => m.MisAmigosModule)
       },
       { path: 'novedades', component: NovedadesComponent},
       { path: 'profile', component: ProfileComponent},

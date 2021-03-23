@@ -21,9 +21,6 @@ import { UserSettingsComponent } from './components/pages/profile/user-settings/
 import { CommunityComponent } from './components/pages/profile/community/community.component';
 import { ImagePipe } from './pipes/image.pipe';
 
-import { MisAmigosComponent } from './components/pages/mis-amigos/mis-amigos.component';
-import { AmigosFollowingComponent } from './components/pages/mis-amigos/amigos-following/amigos-following.component';
-import { AmigosFollowerComponent } from './components/pages/mis-amigos/amigos-follower/amigos-follower.component';
 
 
 
@@ -44,9 +41,6 @@ import { AmigosFollowerComponent } from './components/pages/mis-amigos/amigos-fo
     UserSettingsComponent,
     CommunityComponent,
     ImagePipe,
-    MisAmigosComponent,
-    AmigosFollowingComponent,
-    AmigosFollowerComponent
   ],
   imports: [
     BrowserModule,
