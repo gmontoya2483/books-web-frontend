@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth.service';
 import {Usuario} from '../../../../models/ususario.model';
 import Swal from 'sweetalert2';
-import {UsuarioService} from '../../../../services/usuario/usuario.service';
+import {UsuarioService} from '../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-verificar-email',

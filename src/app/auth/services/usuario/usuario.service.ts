@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Usuario} from '../../models/ususario.model';
+import {Usuario} from '../../../models/ususario.model';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 import {catchError, map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import {throwError} from 'rxjs';

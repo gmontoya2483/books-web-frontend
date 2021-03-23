@@ -20,15 +20,11 @@ import { PhotoComponent } from './components/pages/profile/photo/photo.component
 import { UserSettingsComponent } from './components/pages/profile/user-settings/user-settings.component';
 import { CommunityComponent } from './components/pages/profile/community/community.component';
 import { ImagePipe } from './pipes/image.pipe';
-import { MiComunidadComponent } from './components/pages/mi-comunidad/mi-comunidad.component';
-import { ComunidadUsersComponent } from './components/pages/mi-comunidad/comunidad-users/comunidad-users.component';
-import { ComunidadBooksComponent } from './components/pages/mi-comunidad/comunidad-books/comunidad-books.component';
+
 import { MisAmigosComponent } from './components/pages/mis-amigos/mis-amigos.component';
 import { AmigosFollowingComponent } from './components/pages/mis-amigos/amigos-following/amigos-following.component';
 import { AmigosFollowerComponent } from './components/pages/mis-amigos/amigos-follower/amigos-follower.component';
-import { BibliotecaComponent } from './components/pages/biblioteca/biblioteca.component';
-import { BibliotecaBooksComponent } from './components/pages/biblioteca/biblioteca-books/biblioteca-books.component';
-import { BibliotecaAutoresComponent } from './components/pages/biblioteca/biblioteca-autores/biblioteca-autores.component';
+
 
 
 
@@ -48,23 +44,17 @@ import { BibliotecaAutoresComponent } from './components/pages/biblioteca/biblio
     UserSettingsComponent,
     CommunityComponent,
     ImagePipe,
-    MiComunidadComponent,
-    ComunidadUsersComponent,
-    ComunidadBooksComponent,
     MisAmigosComponent,
     AmigosFollowingComponent,
-    AmigosFollowerComponent,
-    BibliotecaComponent,
-    BibliotecaBooksComponent,
-    BibliotecaAutoresComponent
+    AmigosFollowerComponent
   ],
-    imports: [
-      BrowserModule,
-      AppRoutingModule,
-      ReactiveFormsModule,
-      FormsModule,
-      HttpClientModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

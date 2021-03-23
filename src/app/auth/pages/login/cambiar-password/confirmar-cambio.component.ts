@@ -5,7 +5,7 @@ import {Usuario} from '../../../../models/ususario.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import {AuthService} from '../../../services/auth/auth.service';
-import {UsuarioService} from '../../../../services/usuario/usuario.service';
+import {UsuarioService} from '../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-confirmar-cambio',
