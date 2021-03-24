@@ -1,8 +1,7 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MeService} from '../../../../services/me/me.service';
-import {Country} from '../../../../models/country.model';
-import {CountriesService} from '../../../../services/countries/countries.service';
+import {Component,  OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MeService} from '../../../services/me/me.service';
+import {CountriesService} from '../../../shared/services/countries/countries.service';
 import {Subscription} from 'rxjs';
 
 @Component({

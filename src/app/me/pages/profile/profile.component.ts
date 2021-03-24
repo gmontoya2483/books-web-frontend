@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MeService} from '../../../services/me/me.service';
 
 @Component({
@@ -14,7 +14,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
 }

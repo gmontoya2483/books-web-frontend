@@ -9,7 +9,6 @@ import {NovedadesComponent} from './components/pages/novedades/novedades.compone
 
 import {LoginGuardGuard} from './auth/guards/login-guard.guard';
 
-import {ProfileComponent} from './components/pages/profile/profile.component';
 
 
 const routes: Routes = [
@@ -33,8 +32,11 @@ const routes: Routes = [
         path: 'amigos',
         loadChildren: () => import('./mis-amigos/mis-amigos.module').then(m => m.MisAmigosModule)
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('./me/me.module').then( m => m.MeModule)
+      },
       { path: 'novedades', component: NovedadesComponent},
-      { path: 'profile', component: ProfileComponent},
       { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
     ]
   },

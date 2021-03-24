@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
-import {Country} from '../../models/country.model';
+import {Country} from '../../../models/country.model';
 import {throwError} from 'rxjs';
-import {AuthService} from '../../auth/services/auth/auth.service';
+import {AuthService} from '../../../auth/services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'

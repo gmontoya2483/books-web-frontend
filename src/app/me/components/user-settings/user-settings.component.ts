@@ -1,9 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MeService} from '../../../../services/me/me.service';
-import {Usuario} from '../../../../models/ususario.model';
-import {Country} from '../../../../models/country.model';
-import {CountriesService} from '../../../../services/countries/countries.service';
+
+import {Usuario} from '../../../models/ususario.model';
+import {Country} from '../../../models/country.model';
+import {CountriesService} from '../../../shared/services/countries/countries.service';
+import {MeService} from '../../../services/me/me.service';
 
 @Component({
   selector: 'app-user-settings',

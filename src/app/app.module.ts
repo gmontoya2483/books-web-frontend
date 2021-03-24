@@ -15,10 +15,8 @@ import { NovedadesComponent } from './components/pages/novedades/novedades.compo
 import { MuroComponent } from './components/pages/muro/muro.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 
-import { ProfileComponent } from './components/pages/profile/profile.component';
-import { PhotoComponent } from './components/pages/profile/photo/photo.component';
-import { UserSettingsComponent } from './components/pages/profile/user-settings/user-settings.component';
-import { CommunityComponent } from './components/pages/profile/community/community.component';
+
+
 import { ImagePipe } from './pipes/image.pipe';
 
 
@@ -36,10 +34,6 @@ import { ImagePipe } from './pipes/image.pipe';
     NovedadesComponent,
     MuroComponent,
     FooterComponent,
-    ProfileComponent,
-    PhotoComponent,
-    UserSettingsComponent,
-    CommunityComponent,
     ImagePipe,
   ],
   imports: [
