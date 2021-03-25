@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MeService} from '../../../services/me/me.service';
+import {MeService} from '../../../me/services/me/me.service';
 
 @Component({
   selector: 'app-biblioteca',

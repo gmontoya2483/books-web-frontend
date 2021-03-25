@@ -7,7 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './components/shared/header/header.component';
-import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
+
 import { PagenotfoundComponent } from './components/shared/pagenotfound/pagenotfound.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { PagesComponent } from './components/pages/pages.component';
@@ -18,6 +18,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 
 
 import { ImagePipe } from './pipes/image.pipe';
+import { SideNavBarComponent } from './shared/components/side-nav-bar/side-nav-bar.component';
 
 
 
@@ -27,7 +28,6 @@ import { ImagePipe } from './pipes/image.pipe';
   declarations: [
     AppComponent,
     HeaderComponent,
-    SidebarComponent,
     PagenotfoundComponent,
     DashboardComponent,
     PagesComponent,
@@ -35,6 +35,7 @@ import { ImagePipe } from './pipes/image.pipe';
     MuroComponent,
     FooterComponent,
     ImagePipe,
+    SideNavBarComponent,
   ],
   imports: [
     BrowserModule,

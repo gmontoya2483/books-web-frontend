@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Usuario} from '../../../models/ususario.model';
 import {Country} from '../../../models/country.model';
 import {CountriesService} from '../../../shared/services/countries/countries.service';
-import {MeService} from '../../../services/me/me.service';
+import {MeService} from '../../services/me/me.service';
 
 @Component({
   selector: 'app-user-settings',

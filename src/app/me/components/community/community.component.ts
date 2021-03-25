@@ -1,6 +1,6 @@
 import {Component,  OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {MeService} from '../../../services/me/me.service';
+import {MeService} from '../../services/me/me.service';
 import {CountriesService} from '../../../shared/services/countries/countries.service';
 import {Subscription} from 'rxjs';
 

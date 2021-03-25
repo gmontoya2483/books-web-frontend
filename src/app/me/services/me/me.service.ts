@@ -1,14 +1,14 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Usuario} from '../../models/ususario.model';
-import {environment} from '../../../environments/environment';
+import {Usuario} from '../../../models/ususario.model';
+import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
-import {AuthService} from '../../auth/services/auth/auth.service';
-import {CountriesService} from '../../shared/services/countries/countries.service';
-import {FileUploadService} from '../file-upload/file-upload.service';
+import {AuthService} from '../../../auth/services/auth/auth.service';
+import {CountriesService} from '../../../shared/services/countries/countries.service';
+import {FileUploadService} from '../../../services/file-upload/file-upload.service';
 
 @Injectable({
   providedIn: 'root'
