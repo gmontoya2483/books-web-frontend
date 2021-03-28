@@ -8,12 +8,6 @@ export class SideNavBarService {
 
   private _sideNavBarGeneralItems: SideNavItem[] = [
     {
-      description: 'Dashboard',
-      path: '/dashboard',
-      icon: 'fas fa-tachometer-alt',
-      children: []
-    },
-    {
       description: 'El Mundo',
       path: '/biblioteca',
       icon: 'fas fa-globe-americas',

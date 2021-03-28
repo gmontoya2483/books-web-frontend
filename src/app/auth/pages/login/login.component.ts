@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
               private router: Router) {
 
     if (this.authService.isUserAlreadyLoggedIn()){
-      this.router.navigate(['/dashboard']).then();
+      this.router.navigate(['/home']).then();
     }
 
     this.crearFormulario();
@@ -81,7 +81,9 @@ export class LoginComponent implements OnInit {
       this.loginForm.value.password,
       this.loginForm.value.recuerdame).subscribe((resp: any) => {
 
-      this.router.navigate(['/dashboard']).then();
+        console.log(resp);
+
+      this.router.navigate(['/home']).then();
     });
   }
 

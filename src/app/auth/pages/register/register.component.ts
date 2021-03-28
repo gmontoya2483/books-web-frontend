@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
                private router: Router) {
 
     if (this.authService.isUserAlreadyLoggedIn()){
-      this.router.navigate(['/dashboard']).then();
+      this.router.navigate(['/home']).then();
     }
 
     this.crearFormulario();

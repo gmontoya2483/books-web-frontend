@@ -5,20 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
-
-import { HeaderComponent } from './components/shared/header/header.component';
-
-import { PagenotfoundComponent } from './components/shared/pagenotfound/pagenotfound.component';
-import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
-import { PagesComponent } from './components/pages/pages.component';
-import { NovedadesComponent } from './components/pages/novedades/novedades.component';
-import { MuroComponent } from './components/pages/muro/muro.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
-
-
-
-import { ImagePipe } from './pipes/image.pipe';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { PagenotfoundComponent } from './shared/pages/pagenotfound/pagenotfound.component';
+import { PagesComponent } from './shared/pages/pages/pages.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 import { SideNavBarComponent } from './shared/components/side-nav-bar/side-nav-bar.component';
+import {SharedModule} from './shared/shared.module';
 
 
 
@@ -29,12 +21,8 @@ import { SideNavBarComponent } from './shared/components/side-nav-bar/side-nav-b
     AppComponent,
     HeaderComponent,
     PagenotfoundComponent,
-    DashboardComponent,
     PagesComponent,
-    NovedadesComponent,
-    MuroComponent,
     FooterComponent,
-    ImagePipe,
     SideNavBarComponent,
   ],
   imports: [
@@ -42,7 +30,8 @@ import { SideNavBarComponent } from './shared/components/side-nav-bar/side-nav-b
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

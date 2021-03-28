@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import {PagenotfoundComponent} from './components/shared/pagenotfound/pagenotfound.component';
-import {PagesComponent} from './components/pages/pages.component';
-import {DashboardComponent} from './components/pages/dashboard/dashboard.component';
-import {MuroComponent} from './components/pages/muro/muro.component';
-import {NovedadesComponent} from './components/pages/novedades/novedades.component';
-
+import {PagenotfoundComponent} from './shared/pages/pagenotfound/pagenotfound.component';
+import {PagesComponent} from './shared/pages/pages/pages.component';
 import {LoginGuardGuard} from './auth/guards/login-guard.guard';
 
 
@@ -18,8 +14,10 @@ const routes: Routes = [
     component: PagesComponent,
     canActivate: [LoginGuardGuard ],
     children: [
-      { path: 'muro', component: MuroComponent},
-      { path: 'dashboard', component: DashboardComponent},
+      {
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+      },
       {
         path: 'biblioteca',
         loadChildren: () => import('./biblioteca/biblioteca.module').then(m => m.BibliotecaModule)
@@ -36,8 +34,7 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('./me/me.module').then( m => m.MeModule)
       },
-      { path: 'novedades', component: NovedadesComponent},
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+      { path: '', redirectTo: '/home', pathMatch: 'full'},
     ]
   },
   {

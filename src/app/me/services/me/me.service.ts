@@ -55,7 +55,7 @@ export class MeService {
         }).then();
         this.me = null;
         this.authService.logout();
-        this.router.navigate(['/login']).then();
+        this.router.navigate(['/auth/login']).then();
         return throwError(err);
       })
     );
