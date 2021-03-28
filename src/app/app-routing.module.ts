@@ -16,19 +16,19 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+        loadChildren: () => import('./home/home.module').then( m => m.HomeModule)
       },
       {
-        path: 'biblioteca',
-        loadChildren: () => import('./biblioteca/biblioteca.module').then(m => m.BibliotecaModule)
+        path: 'world',
+        loadChildren: () => import('./world/world.module').then( m => m.WorldModule)
       },
       {
         path: 'comunidad',
-        loadChildren: () => import('./mi-comunidad/mi-comunidad.module').then(m => m.MiComunidadModule)
+        loadChildren: () => import('./mi-comunidad/mi-comunidad.module').then( m => m.MiComunidadModule)
       },
       {
         path: 'amigos',
-        loadChildren: () => import('./mis-amigos/mis-amigos.module').then(m => m.MisAmigosModule)
+        loadChildren: () => import('./mis-amigos/mis-amigos.module').then( m => m.MisAmigosModule)
       },
       {
         path: 'profile',
