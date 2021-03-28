@@ -14,8 +14,9 @@
       >Cambiar foto de Perfil</button>
     </div>
 
-    <div *ngIf="changeImage && !imagenSubir" class="mb-3">
-      <input  type="file" (change)="cambiarImagen($event.target.files[0])">
+    <div *ngIf="changeImage && !imagenSubir" class="mb-3 custom-file">
+      <label class="custom-file-label" for="inputFile">Seleccionar Imagen</label>
+      <input  id="inputFile" class="custom-file-input" type="file" (change)="cambiarImagen($event.target.files[0])">
     </div>
 
 
