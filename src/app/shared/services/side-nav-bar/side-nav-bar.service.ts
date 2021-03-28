@@ -9,11 +9,11 @@ export class SideNavBarService {
   private _sideNavBarGeneralItems: SideNavItem[] = [
     {
       description: 'El Mundo',
-      path: '/biblioteca',
+      path: '/world',
       icon: 'fas fa-globe-americas',
       children: [
-        { description: 'Todos los libros', path: '/biblioteca/books'},
-        { description: 'Todos los Autores', path: '/biblioteca/authors'}
+        { description: 'Todos los libros', path: '/world/books'},
+        { description: 'Todos los Autores', path: '/world/authors'}
       ]
     }
   ];
