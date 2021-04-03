@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Pagination} from '../../../shared/interfaces/pagination.interface';
-import {Author} from '../../../shared/interfaces/author.interface';
+import {Author} from '../../interfaces/author.interface';
 import {AuthorsService} from '../../services/authors/authors.service';
+import {Route, Router} from '@angular/router';
 
 @Component({
   selector: 'app-authors',
@@ -21,11 +22,19 @@ export class AuthorsComponent implements OnInit {
     return [... this._authors];
   }
 
-  constructor(private authorService: AuthorsService) {
-    this.getAuthors();
+  constructor(private authorService: AuthorsService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.search = this.authorService.search;
+    this.pageSize = this.authorService.pageSize;
+    this.pagination = this.authorService.pagination;
+    if ( this.pagination) {
+      this.getAuthors(this.pagination.currentPage);
+    } else {
+      this.getAuthors();
+    }
   }
 
   getAuthors(page = 1) {
@@ -59,7 +68,9 @@ export class AuthorsComponent implements OnInit {
   }
 
   newAuthor(): void {
-    console.log(`Nuevo Autor`);
-
+    this.authorService.search = this.search;
+    this.authorService.pageSize = this.pageSize;
+    this.authorService.pagination = this.pagination;
+    this.router.navigate(['/world', 'authors', 'new']).then();
   }
 }
