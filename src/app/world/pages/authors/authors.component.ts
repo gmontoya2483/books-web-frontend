@@ -3,6 +3,7 @@ import {Pagination} from '../../../shared/interfaces/pagination.interface';
 import {Author} from '../../interfaces/author.interface';
 import {AuthorsService} from '../../services/authors/authors.service';
 import {Route, Router} from '@angular/router';
+import {PageSizesService} from '../../../shared/services/page-sizes/page-sizes.service';
 
 @Component({
   selector: 'app-authors',
@@ -18,12 +19,18 @@ export class AuthorsComponent implements OnInit {
 
   private _authors: Author [] = [];
 
+  private _pageSizes: number [] = this.pageSizesService.pageSizes;
+  public get pageSizes(): number [] {
+    return this._pageSizes;
+  }
+
   get authors(): Author[]{
     return [... this._authors];
   }
 
   constructor(private authorService: AuthorsService,
-              private router: Router) {
+              private router: Router,
+              private pageSizesService: PageSizesService) {
   }
 
   ngOnInit(): void {

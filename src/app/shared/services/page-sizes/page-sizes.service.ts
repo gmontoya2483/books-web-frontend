@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class PageSizesService {
 
-  private _pageSizes: number[] = [10, 25, 50, 100];
+  private _pageSizes: number[] = [2, 10, 25, 50, 100];
 
   get pageSizes(): number [] {
     return [... this._pageSizes];

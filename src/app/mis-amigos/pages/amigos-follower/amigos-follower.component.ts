@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MeService} from '../../../me/services/me/me.service';
 import Swal from 'sweetalert2';
+import {Pagination} from '../../../shared/interfaces/pagination.interface';
+import {PageSizesService} from '../../../shared/services/page-sizes/page-sizes.service';
 
 @Component({
   selector: 'app-amigos-follower',
@@ -13,24 +15,18 @@ export class AmigosFollowerComponent implements OnInit {
 
   public pageSize = 25;
   public search = '';
-  public pagination: {
-    previousPage: number,
-    currentPage: number,
-    nextPage: number,
-    totalPages: number,
-    pageSize: number,
-    pages: number [],
-    showing: {
-      from: number,
-      to: number,
-      of: number
-    }
-  };
+  public pagination: Pagination = undefined;
 
-  public followers: any[] = null;
+  public followers: any[] = null; // TODO: (TRSCL-150) Agregar interface followers para usar como tipo de data
 
-  constructor(public meService: MeService) {
+  constructor(private meService: MeService,
+              private pageSizesService: PageSizesService) {
     this.getFollowers();
+  }
+
+  private _pageSizes: number [] = this.pageSizesService.pageSizes;
+  public get pageSizes(): number [] {
+    return this._pageSizes;
   }
 
   ngOnInit(): void {

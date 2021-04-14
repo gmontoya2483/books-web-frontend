@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MeService} from '../../../me/services/me/me.service';
 import Swal from 'sweetalert2';
+import {PageSizesService} from '../../../shared/services/page-sizes/page-sizes.service';
+import {Pagination} from '../../../shared/interfaces/pagination.interface';
 
 @Component({
   selector: 'app-comunidad-users',
@@ -13,26 +15,21 @@ import Swal from 'sweetalert2';
 
 export class ComunidadUsersComponent implements OnInit {
 
+  private _pageSizes: number [] = this.pageSizesService.pageSizes;
+  public get pageSizes(): number [] {
+    return this._pageSizes;
+  }
+
   public pageSize = 25;
   public search = '';
-  public pagination: {
-    previousPage: number,
-    currentPage: number,
-    nextPage: number,
-    totalPages: number,
-    pageSize: number,
-    pages: number [],
-    showing: {
-      from: number,
-      to: number,
-      of: number
-    }
-  };
-  public members: [] = null;
+  public pagination: Pagination = undefined;
+  public members: any [] = null; // TODO: (TRSCL-148) Agregar la intenface members
 
 
 
-  constructor(public meService: MeService) {
+  constructor(private meService: MeService,
+              private pageSizesService: PageSizesService
+              ) {
     this.getMembers();
   }
 
@@ -124,9 +121,7 @@ export class ComunidadUsersComponent implements OnInit {
 
       const follow = resp.follower;
 
-       // @ts-ignore
       if (this.members[i]._id === follow.follower._id){
-         // @ts-ignore
         this.members[i].follower = {_id: follow._id, isConfirmed: follow.isConfirmed};
        }
     });

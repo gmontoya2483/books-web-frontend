@@ -12,10 +12,8 @@
             class="form-control form-control-sm custom-select custom-select-sm"
             (change)="changePageSize()"
           >
-            <option value="1" selected="">1</option>
-            <option value="10" selected="">10</option>
-            <option value="25">25</option><option value="50">50</option>
-            <option value="100">100</option>
+            <option *ngFor="let size of this.pageSizes" [value]="size" selected="">{{ size }}</option>
+
           </select>&nbsp;
           </label>
         </div>

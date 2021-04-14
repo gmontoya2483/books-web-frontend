@@ -19,15 +19,16 @@ export class BooksComponent implements OnInit {
   public pagination: Pagination = undefined;
 
   private _books: Book [] = [];
+  get books(): Book[]{
+    return [... this._books];
+  }
 
   private _pageSizes: number [] = this.pageSizesService.pageSizes;
   public get pageSizes(): number [] {
     return this._pageSizes;
   }
 
-  get books(): Book[]{
-    return [... this._books];
-  }
+
 
   constructor( private bookService: BooksService,
                private router: Router,
