@@ -1,4 +1,5 @@
 import {Pagination} from '../../shared/interfaces/pagination.interface';
+import {IsDeleted} from '../../shared/interfaces/is-deleted.interface';
 
 export interface AuthorsRootResponse {
   ok: boolean;
@@ -31,14 +32,16 @@ export interface Author {
   __v: number;
 }
 
+export interface ShortAuthor {
+  _id: string;
+  name: string;
+  lastName: string;
+}
+
 export interface NewAuthor {
   name: string;
   lastName: string;
 }
 
-export interface IsDeleted {
-  value: boolean;
-  deletedDateTime: null;
-}
 
 

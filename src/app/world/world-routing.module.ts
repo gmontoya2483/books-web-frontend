@@ -4,6 +4,7 @@ import {WorldComponent} from './pages/world/world.component';
 import {BooksComponent} from './pages/books/books.component';
 import {AuthorsComponent} from './pages/authors/authors.component';
 import {NewAuthorComponent} from './pages/new-author/new-author.component';
+import {NewBookComponent} from './pages/new-book/new-book.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: WorldComponent,
     children: [
       { path: 'books', component: BooksComponent },
+      { path: 'books/new', component: NewBookComponent },
       { path: 'authors', component: AuthorsComponent },
       { path: 'authors/new', component: NewAuthorComponent },
       { path: '**', redirectTo: '/world/books'}

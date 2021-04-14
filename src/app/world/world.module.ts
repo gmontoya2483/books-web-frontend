@@ -7,10 +7,11 @@ import { BooksComponent } from './pages/books/books.component';
 import { AuthorsComponent } from './pages/authors/authors.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NewAuthorComponent } from './pages/new-author/new-author.component';
+import { NewBookComponent } from './pages/new-book/new-book.component';
 
 
 @NgModule({
-  declarations: [WorldComponent, BooksComponent, AuthorsComponent, NewAuthorComponent],
+  declarations: [WorldComponent, BooksComponent, AuthorsComponent, NewAuthorComponent, NewBookComponent],
   imports: [
     CommonModule,
     FormsModule,
