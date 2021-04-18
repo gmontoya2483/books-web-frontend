@@ -2,11 +2,18 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../auth/services/auth/auth.service';
-import {Usuario} from '../../../models/ususario.model';
 import {catchError, map, tap} from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import {throwError} from 'rxjs';
-import {AuthorErrorResponse, AuthorRootResponse, AuthorsRootResponse, NewAuthor} from '../../interfaces/author.interface';
+import {
+  Author,
+  AuthorErrorResponse,
+  AuthorRootResponse,
+  Authors,
+  AuthorsRootResponse,
+  NewAuthor,
+  ShortAuthor
+} from '../../interfaces/author.interface';
 import {Pagination} from '../../../shared/interfaces/pagination.interface';
 
 @Injectable({
@@ -70,7 +77,7 @@ export class AuthorsService {
     }
 
     return this.http.get(url, {headers, params}).pipe(
-      map( (resp: AuthorsRootResponse) => {
+      map( (resp: AuthorsRootResponse): Authors => {
         return resp.authors;
       }),
       catchError((err: any) => {
@@ -85,6 +92,34 @@ export class AuthorsService {
     );
 
   }
+
+  getAuthorsList(){
+    const url = `${this.baseUrl}`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token){
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.get(url, { headers }).pipe(
+      map( (resp: AuthorsRootResponse): ShortAuthor[] => {
+        return resp.authors.authors.map( (author: Author) => {
+          return {_id: author._id, name: author.name, lastName: author.lastName};
+        });
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion de los Autores: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
 
   saveAuthor({ name, lastName}: NewAuthor) {
     const url = `${this.baseUrl}`;

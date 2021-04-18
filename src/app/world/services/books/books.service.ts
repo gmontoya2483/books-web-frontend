@@ -3,11 +3,10 @@ import {Pagination} from '../../../shared/interfaces/pagination.interface';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AuthService} from '../../../auth/services/auth/auth.service';
-import {catchError, map} from 'rxjs/operators';
-import {AuthorsRootResponse} from '../../interfaces/author.interface';
+import {catchError, map, tap} from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import {throwError} from 'rxjs';
-import {BooksRootResponse} from '../../interfaces/book.interface';
+import {BookErrorResponse, BookRootResponse, BooksRootResponse, NewBook} from '../../interfaces/book.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -83,6 +82,36 @@ export class BooksService {
 
     );
 
+  }
+
+  saveBook({ title, description, genreId, authorId}: NewBook) {
+    const url = `${this.baseUrl}`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token) {
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.post<BooksRootResponse | BookErrorResponse>(url, {title, description, genreId, authorId}, {headers}).pipe(
+      tap((resp: BookRootResponse | BookErrorResponse) => {
+        Swal.fire({
+          title: 'Nuevo Libro',
+          text: resp.mensaje,
+          icon: 'success'
+        }).then();
+      }),
+      map((resp: BookRootResponse | BookErrorResponse) => true),
+      catchError(err => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se ha podido agregar el libro: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
   }
 
 
