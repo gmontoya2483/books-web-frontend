@@ -115,4 +115,31 @@ export class BooksService {
   }
 
 
+  getSingleBook(bookId: string){
+    const url = `${this.baseUrl}/${bookId}`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token){
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.get(url, {headers}).pipe(
+      map( (resp: BookRootResponse) => {
+        return resp.book;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion del libro: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+
+    );
+  }
+
+
 }

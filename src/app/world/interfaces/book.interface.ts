@@ -44,6 +44,16 @@ export interface NewBook{
   genreId: string;
 }
 
+export interface ViewBook{
+  pathFrom: string;
+  bookDetails: {
+    _id: string;
+    title: string;
+    genre: string;
+    description: string;
+  };
+}
+
 
 
 

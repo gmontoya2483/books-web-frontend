@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Pagination} from '../../../shared/interfaces/pagination.interface';
-import {Author} from '../../interfaces/author.interface';
 import {Book} from '../../interfaces/book.interface';
 import {BooksService} from '../../services/books/books.service';
 import {Router} from '@angular/router';
@@ -70,7 +69,11 @@ export class BooksComponent implements OnInit {
   }
 
   showBook(_id: string): void {
-    console.log(`Ir al Libro: ${_id}`);
+    this.bookService.search = this.search;
+    this.bookService.pageSize = this.pageSize;
+    this.bookService.pagination = this.pagination;
+    this.router.navigate(['/world', 'books', 'view', _id]).then();
+    // console.log(`Ir al Libro: ${_id}`);
 
   }
 

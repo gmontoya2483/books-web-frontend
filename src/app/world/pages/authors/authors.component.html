@@ -52,10 +52,10 @@
         <tbody>
         <tr *ngFor="let author of this.authors; index as i">
           <td>
-            {{ author.lastName }}
+            {{ author.lastName | titlecase}}
           </td>
           <td>
-            {{ author.name }}
+            {{ author.name | titlecase}}
           </td>
           <td>
             <div class="btn btn-outline-success" (click)="showAuthor(author._id)">

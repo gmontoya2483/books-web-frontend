@@ -28,7 +28,7 @@ export class NewBookComponent implements OnInit {
 
   miFormulario: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-    description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(1500)]],
+    description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5000)]],
     genreId: ['', [Validators.required]],
     authorId: ['', [Validators.required]]
   });
@@ -74,7 +74,6 @@ export class NewBookComponent implements OnInit {
     }
 
     const { title, description, genreId, authorId } = this.miFormulario.value;
-
     this.booksService.saveBook({title, description, genreId, authorId}).subscribe();
     this.router.navigate(['/world', 'books']).then();
   }
