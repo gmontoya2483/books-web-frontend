@@ -9,15 +9,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NewAuthorComponent } from './pages/new-author/new-author.component';
 import { NewBookComponent } from './pages/new-book/new-book.component';
 import { ViewBookComponent } from './pages/view-book/view-book.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [WorldComponent, BooksComponent, AuthorsComponent, NewAuthorComponent, NewBookComponent, ViewBookComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    WorldRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        WorldRoutingModule,
+        SharedModule
+    ]
 })
 export class WorldModule { }

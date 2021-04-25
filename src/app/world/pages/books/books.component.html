@@ -58,7 +58,7 @@
           {{ book.title | titlecase }}
         </td>
         <td class="col-4">
-          {{ book.description }}
+          {{ book.description | truncateText:500}}
         </td>
         <td class="col-2">
           {{ book.author.lastName | titlecase }}  {{ book.author.name | titlecase }}
