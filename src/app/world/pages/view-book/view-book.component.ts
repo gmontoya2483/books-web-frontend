@@ -13,25 +13,29 @@ export class ViewBookComponent implements OnInit {
 
   book: Book;
   private bookId: string;
+  private authorId: string;
 
   constructor(private router: Router,
               private booksService: BooksService,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.bookId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
+    this.authorId = this.activatedRoute.snapshot.paramMap.get('authorId');
     this.getBook();
   }
 
 
   back() {
-    this.router.navigate(['/world', 'books']).then();
+    if (this.authorId){
+      return this.router.navigate(['/world', 'authors', 'view', this.authorId]).then();
+    }
+    return this.router.navigate(['/world', 'books']).then();
   }
 
   private getBook() {
     this.booksService.getSingleBook(this.bookId).subscribe(
       (resp: Book) => {
-        console.log(resp);
         this.book = resp;
       }
     );

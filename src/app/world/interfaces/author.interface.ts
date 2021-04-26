@@ -1,5 +1,6 @@
 import {Pagination} from '../../shared/interfaces/pagination.interface';
 import {IsDeleted} from '../../shared/interfaces/is-deleted.interface';
+import {Book} from './book.interface';
 
 export interface AuthorsRootResponse {
   ok: boolean;
@@ -11,6 +12,14 @@ export interface AuthorRootResponse {
   author: Author;
   mensaje: string;
 }
+
+export interface AuthorBooksRootResponse {
+  ok: boolean;
+  books?: Book[];
+  mensaje?: string;
+}
+
+
 
 export interface Authors {
   pagination: Pagination;

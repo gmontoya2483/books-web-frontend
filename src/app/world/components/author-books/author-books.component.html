@@ -1,0 +1,51 @@
+<div class="row mt-3">
+  <div class="col"><strong>Libros:</strong></div>
+</div>
+
+<div *ngIf="books.length ===0" class="row mt-3">
+  <div class="col">
+    <div class="alert alert-info" role="alert">
+      <p> No se encontraron libros del autor/a <strong>{{authorLastName | titlecase }}, {{ authorName | titlecase }}</strong>. </p>
+    </div>
+  </div>
+</div>
+
+<!-- Tabla de resultados -->
+<div *ngIf="books.length > 0" class="table-responsive table mt-3"  role="grid" aria-describedby="dataTable_info">
+  <table class="table my-0" id="dataTable">
+
+    <thead>
+    <tr class="d-flex">
+      <th class="col-4">Title</th>
+      <th class="col-5">Description</th>
+      <th class="col-2">Genre</th>
+      <th class="col-1"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of this.books; index as i"
+        class="d-flex"
+    >
+      <td class="col-4">
+        {{ book.title | titlecase }}
+      </td>
+      <td class="col-5">
+        {{ book.description | truncateText:500}}
+      </td>
+      <td class="col-2">
+        {{ book.genre.name | titlecase }}
+      </td>
+      <td class="col-1">
+        <div class="btn btn-outline-success" (click)="showBook(book._id)">
+          <i class="far fa-eye"></i>
+        </div>
+      </td>
+
+    </tr>
+
+    </tbody>
+
+  </table>
+</div>
+<!-- Fin Tabla de resultados -->
+

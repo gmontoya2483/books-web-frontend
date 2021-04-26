@@ -70,8 +70,7 @@ export class AuthorsComponent implements OnInit {
   }
 
   showAuthor(_id: string): void {
-    console.log(`Ir al Autor: ${_id}`);
-
+    this.router.navigate(['/world', 'authors', 'view', _id]).then();
   }
 
   newAuthor(): void {

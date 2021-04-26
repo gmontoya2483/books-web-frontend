@@ -26,7 +26,7 @@ export interface Books {
 
 export interface Book {
   isDeleted: IsDeleted;
-  img: null;
+  img: string | null;
   _id: string;
   title: string;
   description: string;
@@ -37,6 +37,17 @@ export interface Book {
   __v: number;
 }
 
+
+export interface ShortBook {
+  isDeleted: IsDeleted;
+  img: string | null;
+  _id: string;
+  title: string;
+  description: string;
+  author: ShortAuthor;
+  genre: ShortGenre;
+}
+
 export interface NewBook{
   title: string;
   description: string;
@@ -44,15 +55,7 @@ export interface NewBook{
   genreId: string;
 }
 
-export interface ViewBook{
-  pathFrom: string;
-  bookDetails: {
-    _id: string;
-    title: string;
-    genre: string;
-    description: string;
-  };
-}
+
 
 
 

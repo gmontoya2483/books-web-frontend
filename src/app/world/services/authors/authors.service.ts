@@ -6,7 +6,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import {throwError} from 'rxjs';
 import {
-  Author,
+  Author, AuthorBooksRootResponse,
   AuthorErrorResponse,
   AuthorRootResponse,
   Authors,
@@ -15,6 +15,7 @@ import {
   ShortAuthor
 } from '../../interfaces/author.interface';
 import {Pagination} from '../../../shared/interfaces/pagination.interface';
+import {Book} from '../../interfaces/book.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -57,8 +58,8 @@ export class AuthorsService {
   constructor( private http: HttpClient,
                private authService: AuthService ) { }
 
-  getAllAuthors(pageSize: number, page: number = 1, search: string = null){
 
+  getAllAuthors(pageSize: number, page: number = 1, search: string = null){
     const url = `${this.baseUrl}`;
 
     // Obtener el token para posarlo en el header
@@ -121,6 +122,58 @@ export class AuthorsService {
   }
 
 
+  getSingleAuthor(authorId: string){
+    const url = `${this.baseUrl}/${authorId}`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token){
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.get(url, {headers}).pipe(
+      map((resp: AuthorRootResponse) => {
+        return resp.author;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion del autor: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+
+  getAuthorBooks(authorId: string) {
+    const url = `${this.baseUrl}/${authorId}/books`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token){
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.get(url, { headers }).pipe(
+      map( (resp: AuthorBooksRootResponse): Book [] => {
+        return resp.books;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener los libros del autor: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+    );
+  }
+
+
   saveAuthor({ name, lastName}: NewAuthor) {
     const url = `${this.baseUrl}`;
 
@@ -151,8 +204,4 @@ export class AuthorsService {
     );
 
   }
-
-
-
-
 }

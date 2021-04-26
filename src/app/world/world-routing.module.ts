@@ -6,6 +6,7 @@ import {AuthorsComponent} from './pages/authors/authors.component';
 import {NewAuthorComponent} from './pages/new-author/new-author.component';
 import {NewBookComponent} from './pages/new-book/new-book.component';
 import {ViewBookComponent} from './pages/view-book/view-book.component';
+import {ViewAuthorComponent} from './pages/view-author/view-author.component';
 
 
 const routes: Routes = [
@@ -15,9 +16,11 @@ const routes: Routes = [
     children: [
       { path: 'books', component: BooksComponent },
       { path: 'books/new', component: NewBookComponent },
-      { path: 'books/view/:id', component: ViewBookComponent },
+      { path: 'books/view/:bookId', component: ViewBookComponent },
       { path: 'authors', component: AuthorsComponent },
       { path: 'authors/new', component: NewAuthorComponent },
+      { path: 'authors/view/:id', component: ViewAuthorComponent },
+      { path: 'authors/view/:authorId/books/:bookId', component: ViewBookComponent },
       { path: '**', redirectTo: '/world/books'}
     ]
   }
