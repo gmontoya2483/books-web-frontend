@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Book} from '../../interfaces/book.interface';
 import {BooksService} from '../../services/books/books.service';
+import {MeCopyService} from '../../../copy/services/me-copy/me-copy.service';
 
 @Component({
   selector: 'app-view-book',
@@ -17,7 +18,8 @@ export class ViewBookComponent implements OnInit {
 
   constructor(private router: Router,
               private booksService: BooksService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private meCopyService: MeCopyService) { }
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
@@ -43,5 +45,7 @@ export class ViewBookComponent implements OnInit {
   }
 
 
-
+  addCopy( bookId: string ) {
+    this.meCopyService.addCopy( bookId ).subscribe();
+  }
 }

@@ -3,6 +3,7 @@ import {Book, ShortBook} from '../../interfaces/book.interface';
 import {Router} from '@angular/router';
 import {AuthorsService} from '../../services/authors/authors.service';
 import {ViewBookComponent} from '../../pages/view-book/view-book.component';
+import {MeCopyService} from '../../../copy/services/me-copy/me-copy.service';
 
 @Component({
   selector: 'app-author-books',
@@ -22,7 +23,8 @@ export class AuthorBooksComponent implements OnInit {
   }
 
   constructor(private router: Router,
-              private authorService: AuthorsService) { }
+              private authorService: AuthorsService,
+              private meCopyService: MeCopyService) { }
 
   ngOnInit(): void {
     this.getBooks();
@@ -39,5 +41,9 @@ export class AuthorBooksComponent implements OnInit {
 
   showBook(bookId: string): void {
     this.router.navigate(['/world', 'authors', 'view', this.authorId, 'books', bookId]).then();
+  }
+
+  addCopy(bookId: string) {
+    this.meCopyService.addCopy( bookId ).subscribe();
   }
 }

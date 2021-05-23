@@ -4,6 +4,7 @@ import {Book} from '../../interfaces/book.interface';
 import {BooksService} from '../../services/books/books.service';
 import {Router} from '@angular/router';
 import {PageSizesService} from '../../../shared/services/page-sizes/page-sizes.service';
+import {MeCopyService} from '../../../copy/services/me-copy/me-copy.service';
 
 @Component({
   selector: 'app-books',
@@ -31,7 +32,8 @@ export class BooksComponent implements OnInit {
 
   constructor( private bookService: BooksService,
                private router: Router,
-               private pageSizesService: PageSizesService) { }
+               private pageSizesService: PageSizesService,
+               private meCopyService: MeCopyService) { }
 
   ngOnInit(): void {
     this.search = this.bookService.search;
@@ -85,5 +87,8 @@ export class BooksComponent implements OnInit {
   }
 
 
+  addCopy( bookId: string ) {
+    this.meCopyService.addCopy( bookId ).subscribe();
+  }
 
 }

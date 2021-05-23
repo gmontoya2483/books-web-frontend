@@ -58,7 +58,11 @@
             {{ author.name | titlecase}}
           </td>
           <td>
-            <div class="btn btn-outline-success" (click)="showAuthor(author._id)">
+            <div class="btn btn-outline-success"
+                 data-bs-toggle="tooltip"
+                 data-bs-placement="top"
+                 title="Ver Detalle"
+                 (click)="showAuthor(author._id)">
               <i class="far fa-eye"></i>
             </div>
           </td>
