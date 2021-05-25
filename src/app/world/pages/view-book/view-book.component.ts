@@ -15,6 +15,7 @@ export class ViewBookComponent implements OnInit {
   book: Book;
   private bookId: string;
   private authorId: string;
+  private copyId: string;
 
   constructor(private router: Router,
               private booksService: BooksService,
@@ -24,6 +25,7 @@ export class ViewBookComponent implements OnInit {
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
     this.authorId = this.activatedRoute.snapshot.paramMap.get('authorId');
+    this.copyId = this.activatedRoute.snapshot.paramMap.get('copyId');
     this.getBook();
   }
 
@@ -32,6 +34,11 @@ export class ViewBookComponent implements OnInit {
     if (this.authorId){
       return this.router.navigate(['/world', 'authors', 'view', this.authorId]).then();
     }
+
+    if (this.copyId){
+      return this.router.navigate(['/me', 'library']).then();
+    }
+
     return this.router.navigate(['/world', 'books']).then();
   }
 

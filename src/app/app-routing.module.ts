@@ -31,7 +31,7 @@ const routes: Routes = [
         loadChildren: () => import('./mis-amigos/mis-amigos.module').then( m => m.MisAmigosModule)
       },
       {
-        path: 'profile',
+        path: 'me',
         loadChildren: () => import('./me/me.module').then( m => m.MeModule)
       },
       { path: '', redirectTo: '/home', pathMatch: 'full'},

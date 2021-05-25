@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ProfileComponent} from './pages/profile/profile.component';
+import {LibraryComponent} from './pages/library/library.component';
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'profile',
     component: ProfileComponent
   },
   {
+    path: 'library',
+    component: LibraryComponent
+  },
+  {
     path: '**',
-    redirectTo: '/profile'
+    redirectTo: '/me/profile'
   }
 ];
 

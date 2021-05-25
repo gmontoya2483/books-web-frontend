@@ -3,6 +3,7 @@ import { ShortAuthor} from './author.interface';
 import {ShortGenre} from './genre.interface';
 import {IsDeleted} from '../../shared/interfaces/is-deleted.interface';
 
+
 export interface BooksRootResponse {
   ok: boolean;
   books: Books;
@@ -41,6 +42,14 @@ export interface Book {
 export interface ShortBook {
   isDeleted: IsDeleted;
   img: string | null;
+  _id: string;
+  title: string;
+  description: string;
+  author: ShortAuthor;
+  genre: ShortGenre;
+}
+
+export interface ReferencedBook {
   _id: string;
   title: string;
   description: string;
