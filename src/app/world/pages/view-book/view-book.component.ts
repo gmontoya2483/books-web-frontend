@@ -16,6 +16,7 @@ export class ViewBookComponent implements OnInit {
   private bookId: string;
   private authorId: string;
   private copyId: string;
+  private communityId: string;
 
   constructor(private router: Router,
               private booksService: BooksService,
@@ -26,6 +27,7 @@ export class ViewBookComponent implements OnInit {
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
     this.authorId = this.activatedRoute.snapshot.paramMap.get('authorId');
     this.copyId = this.activatedRoute.snapshot.paramMap.get('copyId');
+    this.communityId = this.activatedRoute.snapshot.paramMap.get('communityId');
     this.getBook();
   }
 
@@ -35,8 +37,12 @@ export class ViewBookComponent implements OnInit {
       return this.router.navigate(['/world', 'authors', 'view', this.authorId]).then();
     }
 
-    if (this.copyId){
+    if (this.copyId && !this.communityId){
       return this.router.navigate(['/me', 'library']).then();
+    }
+
+    if (this.communityId){
+      return this.router.navigate(['/comunidad', 'books']).then();
     }
 
     return this.router.navigate(['/world', 'books']).then();

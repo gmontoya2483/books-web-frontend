@@ -1,5 +1,5 @@
 import {IsDeleted} from '../../shared/interfaces/is-deleted.interface';
-import {ReferencedBook} from '../../world/interfaces/book.interface';
+import {Book, ReferencedBook} from '../../world/interfaces/book.interface';
 import {Pagination} from '../../shared/interfaces/pagination.interface';
 
 export interface CopiesRootResponse {
@@ -21,6 +21,7 @@ export interface Copy {
   owner: Owner;
   dateTimeCreated: Date;
   dateTimeUpdated: Date;
+  isOwnerFollowedByMe?: boolean;
   __v: number;
 }
 

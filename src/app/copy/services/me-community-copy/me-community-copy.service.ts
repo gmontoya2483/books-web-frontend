@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
+import {Pagination} from '../../../shared/interfaces/pagination.interface';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AuthService} from '../../../auth/services/auth/auth.service';
 import {catchError, map} from 'rxjs/operators';
+import {CopiesRootResponse} from '../../interfaces/copy.interface';
 import Swal from 'sweetalert2';
 import {throwError} from 'rxjs';
-import {Pagination} from '../../../shared/interfaces/pagination.interface';
-import {BooksRootResponse} from '../../../world/interfaces/book.interface';
-import {CopiesRootResponse} from '../../interfaces/copy.interface';
 import {CopyService} from '../copy/copy.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MeCopyService {
+export class MeCommunityCopyService {
 
   // Parametros pagina Books
   private _pageSize = 25;
@@ -44,22 +43,13 @@ export class MeCopyService {
     return this._pagination;
   }
 
-
-  private baseUrl = `${environment.booksServerUrl}/api/me/copies`;
+  private baseUrl = `${environment.booksServerUrl}/api/me/community/copies`;
 
   constructor(private copyService: CopyService) { }
 
 
-  getAllMyCopies(pageSize: number, page: number = 1, search: string = null) {
+  getAllMyCommunityCopies(pageSize: number, page: number = 1, search: string = null) {
     const url = `${this.baseUrl}`;
     return this.copyService.getAllCopies(url, pageSize, page, search);
   }
-
-
-  addCopy(bookId: string){
-    const url = `${this.baseUrl}`;
-    return this.copyService.addCopy(url, bookId);
-  }
-
-
 }

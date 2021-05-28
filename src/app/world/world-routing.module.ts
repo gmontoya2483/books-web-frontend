@@ -22,6 +22,7 @@ const routes: Routes = [
       { path: 'authors/view/:id', component: ViewAuthorComponent },
       { path: 'authors/view/:authorId/books/:bookId', component: ViewBookComponent },
       { path: 'copies/view/:copyId/books/:bookId', component: ViewBookComponent },
+      { path: 'communities/:communityId/copies/view/:copyId/books/:bookId', component: ViewBookComponent },
       { path: '**', redirectTo: '/world/books'}
     ]
   }
