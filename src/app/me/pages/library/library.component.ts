@@ -80,8 +80,6 @@ export class LibraryComponent implements OnInit {
     this.meCopyService.pageSize = this.pageSize;
     this.meCopyService.pagination = this.pagination;
     this.router.navigate(['/world', 'copies', 'view', copyId, 'books', bookId]).then();
-    // console.log(`Ir a Copia: ${_id}`);
-
   }
 
 

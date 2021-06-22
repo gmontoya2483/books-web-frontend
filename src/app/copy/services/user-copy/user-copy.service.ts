@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../../environments/environment';
 import {Pagination} from '../../../shared/interfaces/pagination.interface';
-
+import {environment} from '../../../../environments/environment';
 import {CopyService} from '../copy/copy.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MeCopyService {
+export class UserCopyService {
 
   // Parametros pagina Books
   private _pageSize = 25;
@@ -39,21 +38,13 @@ export class MeCopyService {
   }
 
 
-  private baseUrl = `${environment.booksServerUrl}/api/me/copies`;
+  private baseUrl = `${environment.booksServerUrl}/api/users`;
 
   constructor(private copyService: CopyService) { }
 
 
-  getAllMyCopies(pageSize: number, page: number = 1, search: string = null) {
-    const url = `${this.baseUrl}`;
+  getAllUserCopies(userId: string, pageSize: number, page: number = 1, search: string = null) {
+    const url = `${this.baseUrl}/${userId}/copies`;
     return this.copyService.getAllCopies(url, pageSize, page, search);
   }
-
-
-  addCopy(bookId: string){
-    const url = `${this.baseUrl}`;
-    return this.copyService.addCopy(url, bookId);
-  }
-
-
 }

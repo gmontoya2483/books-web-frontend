@@ -3,6 +3,7 @@ import {MeService} from '../../../me/services/me/me.service';
 import Swal from 'sweetalert2';
 import {PageSizesService} from '../../../shared/services/page-sizes/page-sizes.service';
 import {Pagination} from '../../../shared/interfaces/pagination.interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-comunidad-users',
@@ -28,7 +29,8 @@ export class ComunidadUsersComponent implements OnInit {
 
 
   constructor(private meService: MeService,
-              private pageSizesService: PageSizesService
+              private pageSizesService: PageSizesService,
+              private router: Router
               ) {
     this.getMembers();
   }
@@ -151,6 +153,19 @@ export class ComunidadUsersComponent implements OnInit {
 
     });
 
+  }
+
+  showUser(userId: string) {
+    console.log(`Usuario  -> ${userId}`);
+    this.router.navigate(['/users', 'profile', userId]).then();
+
+    /*
+        this.bookService.search = this.search;
+    this.bookService.pageSize = this.pageSize;
+    this.bookService.pagination = this.pagination;
+    this.router.navigate(['/world', 'books', 'view', _id]).then();
+    // console.log(`Ir al Libro: ${_id}`);
+    */
   }
 
 }

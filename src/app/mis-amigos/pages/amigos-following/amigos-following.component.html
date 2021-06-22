@@ -28,26 +28,29 @@
       <table class="table my-0" id="dataTable">
 
         <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Siguiendo</th>
-          <th>Te sigue</th>
+        <tr class="d-flex">
+          <th class="col-4">Nombre</th>
+          <th class="col-3">Siguiendo</th>
+          <th class="col-3" >Te sigue</th>
+          <th class="col-2"></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let user of this.followings; index as i">
-          <td>
+        <tr *ngFor="let user of this.followings; index as i"
+            class="d-flex"
+        >
+          <td class="col-4">
             <img class="rounded-circle mr-2"
                  width="40"
                  height="40"
                  [alt]="user.following.nombre +' '+user.following.apellido"
                  [src]="user.following.img | newImage: 'users'"
             >
-            {{user.following.nombre}} {{user.following.apellido}}
+            {{user.following.nombre | titlecase }} {{user.following.apellido | titlecase }}
           </td>
 
           <!-- Siguiendo-->
-          <td>
+          <td class="col-3">
             <div class="row">
               <div class="col">
                 <div *ngIf="user.isConfirmed">
@@ -67,7 +70,7 @@
           <!-- Fin Siguiendo-->
 
           <!-- Seguido por -->
-          <td>
+          <td class="col-3">
             <div class="row">
               <div class="col">
                 <div *ngIf="user.follower">
@@ -88,8 +91,25 @@
             </div>
 
           </td>
-
           <!-- Fin Seguido por -->
+
+          <!-- Acciones -->
+          <td class="col-1">
+            <div class="row">
+
+              <div class="col">
+                <div class="btn btn-outline-success"
+                     data-bs-toggle="tooltip"
+                     data-bs-placement="top"
+                     title="Ver Detalle"
+                     (click)="showUser(user.following._id)"
+                >
+                  <i class="far fa-eye"></i>
+                </div>
+              </div>
+            </div>
+          </td>
+          <!-- Fin Acciones -->
 
 
         </tr>

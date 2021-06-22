@@ -27,26 +27,29 @@
       <table class="table my-0" id="dataTable">
 
         <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Te sigue</th>
-          <th>Siguiendo</th>
+        <tr class="d-flex">
+          <th class="col-4">Nombre</th>
+          <th class="col-3">Siguiendo</th>
+          <th class="col-3" >Te sigue</th>
+          <th class="col-2"></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let user of this.followers; index as i">
-          <td>
+        <tr *ngFor="let user of this.followers; index as i"
+            class="d-flex"
+        >
+          <td class="col-4">
             <img class="rounded-circle mr-2"
                  width="40"
                  height="40"
                  [alt]="user.follower.nombre +' '+user.follower.apellido"
                  [src]="user.follower.img | newImage : 'users'"
             >
-            {{user.follower.nombre}} {{user.follower.apellido}}
+            {{user.follower.nombre | titlecase }} {{user.follower.apellido | titlecase}}
           </td>
 
           <!-- Seguido por -->
-          <td>
+          <td class="col-3">
             <div class="row">
               <div class="col">
                 <div *ngIf="user.isConfirmed">
@@ -71,7 +74,7 @@
 
           <!-- Siguiendo-->
 
-          <td>
+          <td class="col-3">
 
             <div class="row">
               <div class="col">
@@ -90,6 +93,24 @@
           </td>
 
           <!-- Fin Siguiendo-->
+
+          <!-- Acciones -->
+          <td class="col-1">
+            <div class="row">
+
+              <div class="col">
+                <div class="btn btn-outline-success"
+                     data-bs-toggle="tooltip"
+                     data-bs-placement="top"
+                     title="Ver Detalle"
+                     (click)="showUser(user.follower._id)"
+                >
+                  <i class="far fa-eye"></i>
+                </div>
+              </div>
+            </div>
+          </td>
+          <!-- Fin Acciones -->
 
 
         </tr>

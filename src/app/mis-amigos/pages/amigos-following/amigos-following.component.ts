@@ -3,6 +3,7 @@ import {MeService} from '../../../me/services/me/me.service';
 import Swal from 'sweetalert2';
 import {Pagination} from '../../../shared/interfaces/pagination.interface';
 import {PageSizesService} from '../../../shared/services/page-sizes/page-sizes.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-amigos-following',
@@ -24,7 +25,8 @@ export class AmigosFollowingComponent implements OnInit {
   }
 
   constructor(private meService: MeService,
-              private pageSizesService: PageSizesService) {
+              private pageSizesService: PageSizesService,
+              private router: Router) {
     this.getFollowings();
   }
 
@@ -137,4 +139,19 @@ export class AmigosFollowingComponent implements OnInit {
     this.getFollowings(page);
   }
 
+  showUser(userId: string) {
+    console.log(`Siguiendo a -> ${userId}`);
+
+    console.log(`Te sigue  -> ${userId}`);
+    this.router.navigate(['/users', 'following', userId]).then();
+
+    /*
+        this.bookService.search = this.search;
+    this.bookService.pageSize = this.pageSize;
+    this.bookService.pagination = this.pagination;
+    this.router.navigate(['/world', 'books', 'view', _id]).then();
+    // console.log(`Ir al Libro: ${_id}`);
+    */
+
+  }
 }

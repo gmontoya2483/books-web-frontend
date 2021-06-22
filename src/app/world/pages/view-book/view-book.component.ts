@@ -17,6 +17,9 @@ export class ViewBookComponent implements OnInit {
   private authorId: string;
   private copyId: string;
   private communityId: string;
+  private userId: string;
+  private followingId: string;
+  private followerId: string;
 
   constructor(private router: Router,
               private booksService: BooksService,
@@ -28,6 +31,9 @@ export class ViewBookComponent implements OnInit {
     this.authorId = this.activatedRoute.snapshot.paramMap.get('authorId');
     this.copyId = this.activatedRoute.snapshot.paramMap.get('copyId');
     this.communityId = this.activatedRoute.snapshot.paramMap.get('communityId');
+    this.userId = this.activatedRoute.snapshot.paramMap.get('userId');
+    this.followingId = this.activatedRoute.snapshot.paramMap.get('followingId');
+    this.followerId = this.activatedRoute.snapshot.paramMap.get('followerId');
     this.getBook();
   }
 
@@ -35,6 +41,18 @@ export class ViewBookComponent implements OnInit {
   back() {
     if (this.authorId){
       return this.router.navigate(['/world', 'authors', 'view', this.authorId]).then();
+    }
+
+    if (this.userId) {
+      return this.router.navigate(['/users', 'profile', this.userId]).then();
+    }
+
+    if (this.followingId) {
+      return this.router.navigate(['/users', 'following', this.followingId]).then();
+    }
+
+    if (this.followerId) {
+      return this.router.navigate(['/users', 'follower', this.followerId]).then();
     }
 
     if (this.copyId && !this.communityId){
