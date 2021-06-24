@@ -21,7 +21,7 @@
 
   <div class="row">
 
-    <div class="col-4">
+    <div class="col-lg-4">
 
       <div class="row">
         <div class="col">
@@ -37,7 +37,7 @@
 
     </div>
 
-    <div class="col-8">
+    <div class="col-lg-8">
       <app-user-profile-copies *ngIf="userId" [userId]="user._id"></app-user-profile-copies>
       <app-user-profile-copies *ngIf="followingId" [followingId]="user._id"></app-user-profile-copies>
       <app-user-profile-copies *ngIf="followerId" [followerId]="user._id"></app-user-profile-copies>
