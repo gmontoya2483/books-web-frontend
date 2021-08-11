@@ -34,7 +34,8 @@ export class SideNavBarService {
       icon: 'fas fa-users',
       children: [
         { description: 'Siguiendo', path: '/amigos/following'},
-        { description: 'Te Siguen', path: '/amigos/followers'}
+        { description: 'Te Siguen', path: '/amigos/followers'},
+        { description: 'Ejemplares', path: '/amigos/following/copies'}
       ]
     }
   ];

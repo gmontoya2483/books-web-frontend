@@ -3,6 +3,7 @@
     <div class="col-6 mr-auto"><p class="text-primary m-0 font-weight-bold">Ejemplares</p></div>
   </div>
 </div>
+
 <div class="card-body">
   <div class="row">
     <div class="col-md-6 text-nowrap">
@@ -85,7 +86,7 @@
                    data-bs-toggle="tooltip"
                    data-bs-placement="top"
                    title="Ver Detalle"
-                   (click)="showCopy(copy.owner.comunidad._id, copy._id, copy.book._id)">
+                   (click)="showCopy(copy.owner._id, copy._id, copy.book._id)">
                 <i class="far fa-eye"></i>
               </div>
             </div>
@@ -136,4 +137,3 @@
     </div>
   </div>
 </div>
-

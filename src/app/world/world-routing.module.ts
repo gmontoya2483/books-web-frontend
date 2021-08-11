@@ -26,6 +26,7 @@ const routes: Routes = [
       { path: 'users/:userId/copies/view/:copyId/books/:bookId', component: ViewBookComponent },
       { path: 'following/:followingId/copies/view/:copyId/books/:bookId', component: ViewBookComponent },
       { path: 'follower/:followerId/copies/view/:copyId/books/:bookId', component: ViewBookComponent },
+      { path: 'amigos/:amigoId/copies/view/:copyId/books/:bookId', component: ViewBookComponent },
       { path: '**', redirectTo: '/world/books'}
     ]
   }

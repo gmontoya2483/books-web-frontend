@@ -20,6 +20,7 @@ export class ViewBookComponent implements OnInit {
   private userId: string;
   private followingId: string;
   private followerId: string;
+  private amigoId: string;
 
   constructor(private router: Router,
               private booksService: BooksService,
@@ -34,11 +35,19 @@ export class ViewBookComponent implements OnInit {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId');
     this.followingId = this.activatedRoute.snapshot.paramMap.get('followingId');
     this.followerId = this.activatedRoute.snapshot.paramMap.get('followerId');
+    this.amigoId = this.activatedRoute.snapshot.paramMap.get('amigoId');
     this.getBook();
   }
 
 
   back() {
+
+    console.log(this.amigoId);
+
+    if (this.amigoId){
+      return this.router.navigate(['/amigos', 'following', 'copies']).then();
+    }
+
     if (this.authorId){
       return this.router.navigate(['/world', 'authors', 'view', this.authorId]).then();
     }

@@ -7,13 +7,15 @@ import {SharedModule} from '../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {AmigosFollowerComponent} from './pages/amigos-follower/amigos-follower.component';
 import {AmigosFollowingComponent} from './pages/amigos-following/amigos-following.component';
+import { AmigosBooksComponent } from './pages/amigos-books/amigos-books.component';
 
 
 @NgModule({
   declarations: [
     MisAmigosComponent,
     AmigosFollowerComponent,
-    AmigosFollowingComponent
+    AmigosFollowingComponent,
+    AmigosBooksComponent
   ],
   imports: [
     CommonModule,
