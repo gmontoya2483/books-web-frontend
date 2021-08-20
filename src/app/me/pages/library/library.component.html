@@ -14,7 +14,10 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-6 text-nowrap">
+
+
+          <!-- Campo paginación -->
+          <div class="col-md-4 text-nowrap">
             <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
               <label>Mostrar&nbsp;
                 <select
@@ -28,8 +31,25 @@
               </label>
             </div>
           </div>
+          <!-- Fin campo paginación -->
 
-          <div class="col-md-6">
+
+          <div class="col-md-4">
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="formCheck-1"
+                           name="recuerdame"
+                           [(ngModel)]="showDeleted"
+                           (change)="searchBooks()"
+                    >
+                    <label class="form-check-label" for="formCheck-1">Mostrar Eliminados</label>
+                  </div>
+          </div>
+
+
+          <!-- Campo buscar-->
+          <div class="col-md-4">
             <div class="text-md-right dataTables_filter" id="dataTable_filter">
               <label>
                 <input [(ngModel)]="search"
@@ -41,6 +61,7 @@
               </label>
             </div>
           </div>
+          <!-- Fin campo Buscar-->
 
         </div>
 
@@ -63,7 +84,11 @@
                 class="d-flex"
             >
               <td class="col-3">
-                 {{ copy.book.title | titlecase }}
+                {{ copy.book.title | titlecase }}
+                <!--
+                <span *ngIf="copy.isPublic" class="btn badge badge-pill badge-success" (click)="showCopy(copy._id, copy.book._id)">Público</span>
+                <span *ngIf="!copy.isPublic" class="btn badge rounded-pill badge-danger" (click)="showCopy(copy._id, copy.book._id)">Privado</span>
+                -->
               </td>
               <td class="col-4">
                 {{ copy.book.description | truncateText:500}}
@@ -84,6 +109,28 @@
                          title="Ver Detalle"
                          (click)="showCopy(copy._id, copy.book._id)">
                       <i class="far fa-eye"></i>
+                    </div>
+                  </div>
+
+                  <!-- Marcar ejemplar como borrado-->
+                  <div *ngIf="!copy.isDeleted.value" class="col">
+                    <div class="btn btn-outline-danger"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="top"
+                         title="Marcar ejemplar como borrado"
+                         (click)="setDeleted(copy._id, true)">
+                      <i class="far fa-trash-alt"></i>
+                    </div>
+                  </div>
+
+                  <!-- desmarcar ejemplar como borrado-->
+                  <div *ngIf="copy.isDeleted.value" class="col">
+                    <div class="btn btn-outline-primary"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="top"
+                         title="Desmarcar ejemplar como borrado"
+                         (click)="setDeleted(copy._id, false)">
+                      <i class="fas fa-undo"></i>
                     </div>
                   </div>
 <!--                  <div class="col">-->

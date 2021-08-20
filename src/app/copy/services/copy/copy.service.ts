@@ -5,7 +5,7 @@ import {AuthService} from '../../../auth/services/auth/auth.service';
 import {catchError, map} from 'rxjs/operators';
 import {CopiesRootResponse} from '../../interfaces/copy.interface';
 import Swal from 'sweetalert2';
-import {throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class CopyService {
 
 
 
-  getAllCopies(url: string, pageSize: number, page: number = 1, search: string = null){
+  getAllCopies(url: string, pageSize: number, page: number = 1, search: string = null, showDeleted: boolean = false){
 
     // Obtener el token para posarlo en el header
     const token = this.authService.getToken();
@@ -34,6 +34,9 @@ export class CopyService {
     params = params.append('pageSize', String(pageSize));
     if (search) {
       params = params.append('search', search);
+    }
+    if (showDeleted){
+      params = params.append('showDeleted', 'true');
     }
 
     return this.http.get(url, {headers, params}).pipe(
@@ -80,6 +83,43 @@ export class CopyService {
         return throwError(err);
       })
     );
+  }
+
+
+  setDeleted(baseUrl: string, copyId: string, isDeleted: boolean): Observable<any> {
+
+    const url = `${baseUrl}/${copyId}/delete`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token) {
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.put(url, {isDeleted}, {headers}).pipe(
+      map( (resp: any) => {
+        Swal.fire({
+          title: 'Ejemplar',
+          text: resp.mensaje,
+          icon: 'success'
+        }).then();
+        return true;
+      }),
+      catchError((err: any) => {
+        const errorMessage = (isDeleted) ? 'No se pudo marcar la copia como eliminada' : 'No se pudo desmarcar la copia como eliminada';
+        Swal.fire({
+          title: 'Error',
+          text: `${errorMessage}: ${err.error.mensaje}`,
+          icon: 'error'
+        }).then();
+
+        return throwError(err);
+      })
+    );
+
+
+
   }
 
 

@@ -17,6 +17,7 @@ export class LibraryComponent implements OnInit {
 
   public pageSize = 25;
   public search = '';
+  public showDeleted = true;
   public pagination: Pagination = undefined;
 
   private _copies: Copy [] = [];
@@ -42,6 +43,7 @@ export class LibraryComponent implements OnInit {
   ngOnInit(): void {
     this.search = this.meCopyService.search;
     this.pageSize = this.meCopyService.pageSize;
+    this.showDeleted = this.meCopyService.showDeleted;
     this.pagination = this.meCopyService.pagination;
     if ( this.pagination) {
       this.getCopies(this.pagination.currentPage);
@@ -55,7 +57,7 @@ export class LibraryComponent implements OnInit {
     if (this.search.length < 3){
       this.search =  '';
     }
-    this.meCopyService.getAllMyCopies(this.pageSize, page, this.search )
+    this.meCopyService.getAllMyCopies(this.pageSize, page, this.search, this.showDeleted )
       .subscribe((resp: { pagination: Pagination, copies: Copy [] }) => {
         this.pagination = resp.pagination;
         this._copies = resp.copies;
@@ -78,6 +80,7 @@ export class LibraryComponent implements OnInit {
   showCopy( copyId: string, bookId: string): void {
     this.meCopyService.search = this.search;
     this.meCopyService.pageSize = this.pageSize;
+    this.meCopyService.showDeleted = this.showDeleted;
     this.meCopyService.pagination = this.pagination;
     this.router.navigate(['/world', 'copies', 'view', copyId, 'books', bookId]).then();
   }
@@ -85,6 +88,17 @@ export class LibraryComponent implements OnInit {
 
   addCopy(_id: string) {
     console.log(`Add Copia: ${_id}`);
-
   }
+
+
+  setDeleted(copyId: string,  isDeleted: boolean) {
+    this.meCopyService.seMyCopyDeleted(copyId, isDeleted)
+      .subscribe((resp: any) => {
+        if (resp) {
+          this.getCopies(this.pagination.currentPage);
+        }
+      });
+  }
+
+
 }
