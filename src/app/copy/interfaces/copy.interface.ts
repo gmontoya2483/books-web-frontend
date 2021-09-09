@@ -19,10 +19,35 @@ export interface Copy {
   _id: string;
   book: ReferencedBook;
   owner: Owner;
+  currentLoan?: CurrentLoan | null | undefined;
   dateTimeCreated: Date;
   dateTimeUpdated: Date;
   isOwnerFollowedByMe?: boolean;
   __v: number;
+}
+
+
+export enum currentLoanStatusEnum  {
+  requested = 'Requerido',
+  cancelled = 'Cancelado',
+  accepted = 'Aceptado',
+  rejected =  'Rechazado',
+  borrowed = 'Prestado',
+  claimed = 'Reclamado',
+  returned = 'Devuelto',
+  returnedConfirmation =  'Confirmado'
+}
+
+interface CurrentLoan {
+  user: {};
+  status: currentLoanStatusEnum;
+  dateTimeRequested: Date | null;
+  dateTimeAccepted: Date | null;
+  dateTimeRejected: Date | null;
+  dateTimeBorrowed: Date | null;
+  dateTimeClaimed: Date | null;
+  dateTimeReturned: Date | null;
+  dateTimeReturnedConfirmation: Date | null;
 }
 
 export interface ShortCommunity {
