@@ -109,6 +109,18 @@
             </div>
             <!-- Fin pedir prestado un ejemplar-->
 
+            <!-- Pedir prestado un ejemplar-->
+            <div  *ngIf="canBeCancelled(copy)" class="col">
+              <div class="btn btn-outline-info"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   [title]="'Cancelar pedido de prestamo: ' + copy.book.title"
+                   (click)="cancelBorrow(copy._id)">
+                <i class="fas fa-eject"></i>
+              </div>
+            </div>
+            <!-- Fin pedir prestado un ejemplar-->
+
           </div>
 
         </td>

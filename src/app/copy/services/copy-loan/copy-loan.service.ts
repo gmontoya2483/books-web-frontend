@@ -54,5 +54,9 @@ export class CopyLoanService {
     return this.setCopyLoanStatus(copyId, currentLoanStatusEnum.requested);
   }
 
+  setCopyLoanStatusAsCancelled(copyId: string){
+    return this.setCopyLoanStatus(copyId, currentLoanStatusEnum.cancelled);
+  }
+
 
 }

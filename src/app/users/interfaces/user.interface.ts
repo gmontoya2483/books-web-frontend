@@ -21,6 +21,14 @@ export interface User {
   updatedDateTime: Date;
 }
 
+export interface ShortUser {
+  _id: string;
+  email: string;
+  nombre: string;
+  apellido: string;
+  comunidad: Comunidad;
+}
+
 export interface Comunidad {
   _id: string;
   name: string;

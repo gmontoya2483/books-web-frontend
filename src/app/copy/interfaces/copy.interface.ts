@@ -1,6 +1,7 @@
 import {IsDeleted} from '../../shared/interfaces/is-deleted.interface';
 import {Book, ReferencedBook} from '../../world/interfaces/book.interface';
 import {Pagination} from '../../shared/interfaces/pagination.interface';
+import {ShortUser} from '../../users/interfaces/user.interface';
 
 export interface CopiesRootResponse {
   ok: boolean;
@@ -39,7 +40,7 @@ export enum currentLoanStatusEnum  {
 }
 
 interface CurrentLoan {
-  user: {};
+  user: ShortUser;
   status: currentLoanStatusEnum;
   dateTimeRequested: Date | null;
   dateTimeAccepted: Date | null;
