@@ -19,7 +19,12 @@ export class CopyService {
 
 
 
-  getAllCopies(url: string, pageSize: number, page: number = 1, search: string = null, showDeleted: boolean = false){
+  getAllCopies(url: string,
+               pageSize: number,
+               page: number = 1,
+               search: string = null,
+               showDeleted: boolean = false,
+               showOnlyBorrowed: boolean = false){
 
     // Obtener el token para posarlo en el header
     const token = this.authService.getToken();
@@ -37,6 +42,10 @@ export class CopyService {
     }
     if (showDeleted){
       params = params.append('showDeleted', 'true');
+    }
+
+    if (showOnlyBorrowed) {
+      params = params.append('showOnlyBorrowed', 'true');
     }
 
     return this.http.get(url, {headers, params}).pipe(

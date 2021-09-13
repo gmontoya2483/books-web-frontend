@@ -12,7 +12,8 @@ export class MeCopyService {
   // Parametros pagina Books
   private _pageSize = 25;
   private _search = '';
-  public _showDeleted = true;
+  private _showDeleted = true;
+  private _showOnlyBorrowed = false;
   private _pagination: Pagination = undefined;
 
   set pageSize( value: number ) {
@@ -39,6 +40,14 @@ export class MeCopyService {
     return  this._showDeleted;
   }
 
+  set showOnlyBorrowed(value: boolean) {
+    this._showOnlyBorrowed = value;
+  }
+
+  get showOnlyBorrowed() {
+    return this._showOnlyBorrowed;
+  }
+
   set pagination( value: Pagination ) {
     this._pagination = value;
   }
@@ -53,9 +62,9 @@ export class MeCopyService {
   constructor(private copyService: CopyService) { }
 
 
-  getAllMyCopies(pageSize: number, page: number = 1, search: string = null, showDeleted: boolean = false) {
+  getAllMyCopies(pageSize: number, page: number = 1, search: string = null, showDeleted: boolean = false, showOnlyBorrowed: boolean = false) {
     const url = `${this.baseUrl}`;
-    return this.copyService.getAllCopies(url, pageSize, page, search, showDeleted);
+    return this.copyService.getAllCopies(url, pageSize, page, search, showDeleted, showOnlyBorrowed);
   }
 
 

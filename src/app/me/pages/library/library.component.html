@@ -17,7 +17,7 @@
 
 
           <!-- Campo paginación -->
-          <div class="col-md-4 text-nowrap">
+          <div class="col-md-3 text-nowrap">
             <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
               <label>Mostrar&nbsp;
                 <select
@@ -33,23 +33,37 @@
           </div>
           <!-- Fin campo paginación -->
 
-
-          <div class="col-md-4">
+          <!-- Campo Mostrar eliminados -->
+          <div class="col-md-3">
                   <div class="form-check">
                     <input class="form-check-input"
                            type="checkbox"
-                           id="formCheck-1"
-                           name="recuerdame"
+                           id="formCheckDeleted"
                            [(ngModel)]="showDeleted"
                            (change)="searchBooks()"
                     >
-                    <label class="form-check-label" for="formCheck-1">Mostrar Eliminados</label>
+                    <label class="form-check-label" for="formCheckDeleted">Mostrar Eliminados</label>
                   </div>
           </div>
+          <!-- Fin Campo Mostrar eliminados -->
+
+          <!-- Campo Mostrar SoloPrestados -->
+          <div class="col-md-3">
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="formCheckOnlyBorrowed"
+                     [(ngModel)]="showOnlyBorrowed"
+                     (change)="searchBooks()"
+              >
+              <label class="form-check-label" for="formCheckOnlyBorrowed">Sólo ejemplares prestados</label>
+            </div>
+          </div>
+          <!-- Fin Campo Mostrar eliminados -->
 
 
           <!-- Campo buscar-->
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="text-md-right dataTables_filter" id="dataTable_filter">
               <label>
                 <input [(ngModel)]="search"
@@ -72,48 +86,77 @@
 
             <thead>
             <tr class="d-flex">
-              <th class="col-3">Title</th>
-              <th class="col-4">Description</th>
-              <th class="col-2">Author</th>
-              <th class="col-2">Genre</th>
-              <th class="col-1"></th>
+              <th class="col-3">Título</th>
+              <th class="col-4">Descripción</th>
+              <th class="col-2">Autor</th>
+              <th class="col-2">Género</th>
+              <th class="col-1">Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let copy of this.copies; index as i"
                 class="d-flex"
             >
+
+              <!-- Columna Título -->
               <td class="col-3">
-                {{ copy.book.title | titlecase }}
-                <!--
-                <span *ngIf="copy.isPublic" class="btn badge badge-pill badge-success" (click)="showCopy(copy._id, copy.book._id)">Público</span>
-                <span *ngIf="!copy.isPublic" class="btn badge rounded-pill badge-danger" (click)="showCopy(copy._id, copy.book._id)">Privado</span>
-                -->
+
+                <!-- Titulo del Libro -->
+                <div class="row">
+                  <div class="col">
+                    <span class= "btn-link pointer" (click)="showCopy(copy._id, copy.book._id)" >{{ copy.book.title | titlecase }}</span>
+                  </div>
+                </div>
+                <!-- Fin título del Libro -->
+
+                <!-- Statuses -->
+                <div *ngIf="copy.currentLoan" class="row">
+
+                  <!-- badge Solicitado en prestamo -->
+                  <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.requested)" class="col">
+                    <span class="badge badge-pill badge-warning">Solicitado en prestamo: {{copy.currentLoan.user.nombre | titlecase}} {{copy.currentLoan.user.apellido | titlecase}}</span>
+                  </div>
+                  <!-- fin badge Solicitado en prestamo -->
+
+                  <!-- badge Prestamo aceptado -->
+                  <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.accepted)" class="col">
+                    <span class="badge badge-pill badge-info">Prestamo aceptado: {{copy.currentLoan.user.nombre | titlecase}} {{copy.currentLoan.user.apellido | titlecase}}</span>
+                  </div>
+                  <!-- fin badge Prestamo aceptado -->
+
+
+
+                </div>
+                <!-- Fin statuses -->
+
               </td>
+              <!-- Fin Columna Título -->
+
+
+              <!-- Columna Descripción -->
               <td class="col-4">
                 {{ copy.book.description | truncateText:500}}
               </td>
+              <!-- Fin Columna Descripción -->
+
+              <!-- Columna Autor -->
               <td class="col-2">
                 {{ copy.book.author.lastName | titlecase }}  {{ copy.book.author.name | titlecase }}
               </td>
+              <!-- Fin columna Autor -->
+
+              <!-- Columna Género -->
               <td class="col-2">
                 {{ copy.book.genre.name | titlecase }}
               </td>
+              <!-- Fin Columna Género -->
+
+              <!-- Columna Acciones -->
               <td class="col-1">
                 <div class="row">
 
-                  <div class="col">
-                    <div class="btn btn-outline-success"
-                         data-bs-toggle="tooltip"
-                         data-bs-placement="top"
-                         title="Ver Detalle"
-                         (click)="showCopy(copy._id, copy.book._id)">
-                      <i class="far fa-eye"></i>
-                    </div>
-                  </div>
-
                   <!-- Marcar ejemplar como borrado-->
-                  <div *ngIf="!copy.isDeleted.value" class="col">
+                  <div *ngIf="canBeDeleted(copy)" class="col">
                     <div class="btn btn-outline-danger"
                          data-bs-toggle="tooltip"
                          data-bs-placement="top"
@@ -124,7 +167,7 @@
                   </div>
 
                   <!-- desmarcar ejemplar como borrado-->
-                  <div *ngIf="copy.isDeleted.value" class="col">
+                  <div *ngIf="canBeRestored(copy)" class="col">
                     <div class="btn btn-outline-primary"
                          data-bs-toggle="tooltip"
                          data-bs-placement="top"
@@ -133,21 +176,37 @@
                       <i class="fas fa-undo"></i>
                     </div>
                   </div>
-<!--                  <div class="col">-->
-<!--                    <div class="btn btn-outline-primary"-->
-<!--                         data-bs-toggle="tooltip"-->
-<!--                         data-bs-placement="top"-->
-<!--                         title="Agregar ejemplar a tu biblioteca"-->
-<!--                         (click)="addCopy(copy.book._id)"-->
-<!--                    >-->
-<!--                      <i class="fas fa-plus"></i>-->
-<!--                    </div>-->
-<!--                  </div>-->
+
+                  <!-- Aceptar solicitud de prestamo -->
+                  <div *ngIf="canBeAccepted(copy)" class="col">
+                    <div class="btn btn-outline-success"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="top"
+                         title="Aceptar la solicitud de prestamo"
+                         (click)="setAccepted(copy._id)">
+                      <i class="far fa-thumbs-up"></i>
+                    </div>
+                  </div>
+
+
+                  <!-- Rechazar solicitud de prestamo -->
+                  <div *ngIf="canBeRejected(copy)" class="col">
+                    <div class="btn btn-outline-danger"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="top"
+                         title="Rechazar la solicitud de prestamo"
+                         (click)="setRejected(copy._id)">
+                      <i class="far fa-thumbs-down"></i>
+                    </div>
+                  </div>
+
+
 
 
                 </div>
 
               </td>
+              <!-- Columna Acciones -->
 
             </tr>
 

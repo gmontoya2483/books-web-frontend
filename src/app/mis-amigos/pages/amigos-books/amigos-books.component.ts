@@ -100,10 +100,6 @@ export class AmigosBooksComponent implements OnInit {
     ).subscribe(resp => {
       this.getCopies(this.pagination.currentPage);
     });
-
-    // this.copyLoanService.setCopyLoanStatusAsRequested(copyId).subscribe(resp => {
-    //   this.getCopies(this.pagination.currentPage);
-    // });
   }
 
   cancelBorrow(copyId: string) {
