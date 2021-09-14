@@ -137,8 +137,6 @@ export class LibraryComponent implements OnInit {
   }
 
   setRejected(copyId: string) {
-    console.log(`Rejected: ${copyId}` );
-
     this.copyLoanService.setCopyLoanStatusAsRejected(copyId).pipe(
       catchError((err: any) => {
         this.getCopies(this.pagination.currentPage);
@@ -147,15 +145,21 @@ export class LibraryComponent implements OnInit {
     ).subscribe(resp => {
       this.getCopies(this.pagination.currentPage);
     });
-
   }
 
   setClaimed(copyId: string) {
     console.log(`Claimed: ${copyId}` );
   }
 
-  setDelivered(copyId: string) {
-    console.log(`Claimed: ${copyId}` );
+  setBorrowed(copyId: string) {
+    this.copyLoanService.setCopyLoanStatusAsBorrowed(copyId).pipe(
+      catchError((err: any) => {
+        this.getCopies(this.pagination.currentPage);
+        return of(false);
+      })
+    ).subscribe(resp => {
+      this.getCopies(this.pagination.currentPage);
+    });
   }
 
 
@@ -181,6 +185,10 @@ export class LibraryComponent implements OnInit {
   canBeRejected(copy: Copy): boolean {
     return copy.currentLoan
       && (copy.currentLoan.status === this.currentLoanStatus.requested || copy.currentLoan.status === this.currentLoanStatus.accepted);
+  }
+
+  canBeBorrowed(copy: Copy): boolean {
+    return copy.currentLoan && copy.currentLoan.status === this.currentLoanStatus.accepted
   }
 
 

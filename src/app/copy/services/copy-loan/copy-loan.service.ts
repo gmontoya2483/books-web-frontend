@@ -66,5 +66,9 @@ export class CopyLoanService {
     return this.setCopyLoanStatus(copyId, currentLoanStatusEnum.rejected);
   }
 
+  setCopyLoanStatusAsBorrowed(copyId: string){
+    return this.setCopyLoanStatus(copyId, currentLoanStatusEnum.borrowed);
+  }
+
 
 }
