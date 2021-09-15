@@ -149,6 +149,16 @@ export class LibraryComponent implements OnInit {
 
   setClaimed(copyId: string) {
     console.log(`Claimed: ${copyId}` );
+
+    this.copyLoanService.setCopyLoanStatusAsClaimed(copyId).pipe(
+      catchError((err: any) => {
+        this.getCopies(this.pagination.currentPage);
+        return of(false);
+      })
+    ).subscribe(resp => {
+      this.getCopies(this.pagination.currentPage);
+    });
+
   }
 
   setBorrowed(copyId: string) {
@@ -161,6 +171,8 @@ export class LibraryComponent implements OnInit {
       this.getCopies(this.pagination.currentPage);
     });
   }
+
+
 
 
 
@@ -188,7 +200,11 @@ export class LibraryComponent implements OnInit {
   }
 
   canBeBorrowed(copy: Copy): boolean {
-    return copy.currentLoan && copy.currentLoan.status === this.currentLoanStatus.accepted
+    return copy.currentLoan && copy.currentLoan.status === this.currentLoanStatus.accepted;
+  }
+
+  canBeClaimed(copy: Copy): boolean {
+    return copy.currentLoan && copy.currentLoan.status === this.currentLoanStatus.borrowed;
   }
 
 

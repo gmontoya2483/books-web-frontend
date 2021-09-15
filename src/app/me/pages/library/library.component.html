@@ -130,6 +130,12 @@
                   </div>
                   <!-- fin badge Prestado -->
 
+                  <!-- badge Prestado -->
+                  <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.claimed)" class="col">
+                    <span class="badge badge-pill badge-danger">Devolución solicitada: {{copy.currentLoan.user.nombre | titlecase}} {{copy.currentLoan.user.apellido | titlecase}}</span>
+                  </div>
+                  <!-- fin badge Prestado -->
+
 
 
                 </div>
@@ -216,6 +222,17 @@
                          title="Rechazar la solicitud de prestamo"
                          (click)="setRejected(copy._id)">
                       <i class="far fa-thumbs-down"></i>
+                    </div>
+                  </div>
+
+                  <!-- Rechazar solicitud de prestamo -->
+                  <div *ngIf="canBeClaimed(copy)" class="col">
+                    <div class="btn btn-outline-danger"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="top"
+                         title="Soliciar la devolución del ejemplar prestado"
+                         (click)="setClaimed(copy._id)">
+                      <i class="fas fa-exclamation-triangle"></i>
                     </div>
                   </div>
 
