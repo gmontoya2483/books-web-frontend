@@ -11,6 +11,7 @@ export class MisAmigosCopyService {
   // Parametros pagina Books
   private _pageSize = 25;
   private _search = '';
+  private _showOnlyBorrowedToMe = false;
   private _pagination: Pagination = undefined;
 
   set pageSize( value: number ) {
@@ -29,6 +30,14 @@ export class MisAmigosCopyService {
     return this._search;
   }
 
+  set showOnlyBorrowedToMe(value: boolean) {
+    this._showOnlyBorrowedToMe = value;
+  }
+
+  get showOnlyBorrowedToMe() {
+    return this._showOnlyBorrowedToMe;
+  }
+
   set pagination( value: Pagination ) {
     this._pagination = value;
   }
@@ -43,8 +52,11 @@ export class MisAmigosCopyService {
   constructor(private copyService: CopyService) { }
 
 
-  getAllMyFollowingCopies(pageSize: number, page: number = 1, search: string = null) {
+  getAllMyFollowingCopies(pageSize: number,
+                          page: number = 1,
+                          search: string = null,
+                          showOnlyBorrowedToMe: boolean = false) {
     const url = `${this.baseUrl}`;
-    return this.copyService.getAllCopies(url, pageSize, page, search);
+    return this.copyService.getAllCopies(url, pageSize, page, search, false, false, showOnlyBorrowedToMe);
   }
 }

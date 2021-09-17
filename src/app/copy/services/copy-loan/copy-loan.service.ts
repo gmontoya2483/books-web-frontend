@@ -74,5 +74,9 @@ export class CopyLoanService {
     return this.setCopyLoanStatus(copyId, currentLoanStatusEnum.claimed);
   }
 
+  setCopyLoanStatusAsReturned(copyId: string){
+    return this.setCopyLoanStatus(copyId, currentLoanStatusEnum.returned);
+  }
+
 
 }

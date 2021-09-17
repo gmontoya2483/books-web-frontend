@@ -6,7 +6,7 @@
 
 <div class="card-body">
   <div class="row">
-    <div class="col-md-6 text-nowrap">
+    <div class="col-md-4 text-nowrap">
       <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
         <label>Mostrar&nbsp;
           <select
@@ -21,7 +21,22 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <!-- Campo Mostrar SoloPrestados -->
+    <div class="col-md-4">
+      <div class="form-check">
+        <input class="form-check-input"
+               type="checkbox"
+               id="formCheckOnlyBorrowed"
+               [(ngModel)]="showOnlyBorrowedToMe"
+               (change)="searchBooks()"
+        >
+        <label class="form-check-label" for="formCheckOnlyBorrowed">Sólo mis préstamos</label>
+      </div>
+    </div>
+    <!-- Fin Campo Mostrar eliminados -->
+
+
+    <div class="col-md-4">
       <div class="text-md-right dataTables_filter" id="dataTable_filter">
         <label>
           <input [(ngModel)]="search"
@@ -64,17 +79,44 @@
           </div>
           <!-- Fin título del Libro -->
 
-          <!-- Statuses -->
-          <div class="row">
+          <div *ngIf="copy.currentLoan" class="row">
 
-            <!-- badge Disponible-->
-            <div *ngIf="!copy.currentLoan" class="col"> <span class="badge badge-pill badge-success">Disponible</span></div>
-
-            <!-- badge Solicitado en prestamo -->
-            <div *ngIf="isStatus(copy.currentLoan && copy.currentLoan.status, currentLoanStatus.requested)" class="col">
-              <span class="badge badge-pill badge-secondary">Solicitado en prestamo</span>
+            <!-- badge No disponible  -->
+            <div *ngIf="!isAvailable(copy)" class="col">
+              <span class="badge badge-pill badge-danger">No disponible</span>
             </div>
-            <!-- fin badge Solicitado en prestamo -->
+            <!-- fin badge No disponible -->
+
+            <!-- badge requerido  -->
+            <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.requested) && isBorrowedToMe(copy)" class="col">
+              <span class="badge badge-pill badge-secondary">Solicitado en Préstamo</span>
+            </div>
+            <!-- fin badge requerido -->
+
+            <!-- badge prestamo aceptado  -->
+            <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.accepted) && isBorrowedToMe(copy)" class="col">
+              <span class="badge badge-pill badge-info">Préstamo Aceptado</span>
+            </div>
+            <!-- fin badge prestamo Aceptado -->
+
+            <!-- badge prestado  -->
+            <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.borrowed) && isBorrowedToMe(copy)" class="col">
+              <span class="badge badge-pill badge-success">Prestado</span>
+            </div>
+            <!-- fin badge prestado -->
+
+            <!-- badge reclamado  -->
+            <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.claimed) && isBorrowedToMe(copy)" class="col">
+              <span class="badge badge-pill badge-warning">Solicitaron la devolución</span>
+            </div>
+            <!-- fin badge reclamado -->
+
+            <!-- badge Devuelto  -->
+            <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.returned) && isBorrowedToMe(copy)" class="col">
+              <span class="badge badge-pill badge-primary">Devuelto</span>
+            </div>
+            <!-- fin badge Devuelto -->
+
 
           </div>
           <!-- Fin statuses -->
@@ -115,9 +157,9 @@
             </div>
             <!-- Fin pedir prestado un ejemplar-->
 
-            <!-- Pedir prestado un ejemplar-->
+            <!-- Cancelar un pedido de prestamo-->
             <div  *ngIf="canBeCancelled(copy)" class="col">
-              <div class="btn btn-outline-info"
+              <div class="btn btn-outline-danger"
                    data-bs-toggle="tooltip"
                    data-bs-placement="top"
                    [title]="'Cancelar pedido de prestamo: ' + copy.book.title"
@@ -125,7 +167,20 @@
                 <i class="fas fa-eject"></i>
               </div>
             </div>
-            <!-- Fin pedir prestado un ejemplar-->
+            <!-- Fin Cancelar un pedido de prestamo-->
+
+            <!-- Devolver ejemplar-->
+            <div  *ngIf="canBeReturned(copy)" class="col">
+              <div class="btn btn-outline-info"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="top"
+                   [title]="'Devolver ejemplar: ' + copy.book.title"
+                   (click)="returnCopy(copy._id)">
+                <i class="fas fa-undo"></i>
+              </div>
+            </div>
+            <!-- Fin Cancelar un pedido de prestamo-->
+
 
           </div>
 

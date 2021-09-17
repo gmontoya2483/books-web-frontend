@@ -62,7 +62,11 @@ export class MeCopyService {
   constructor(private copyService: CopyService) { }
 
 
-  getAllMyCopies(pageSize: number, page: number = 1, search: string = null, showDeleted: boolean = false, showOnlyBorrowed: boolean = false) {
+  getAllMyCopies(pageSize: number,
+                 page: number = 1,
+                 search: string = null,
+                 showDeleted: boolean = false,
+                 showOnlyBorrowed: boolean = false) {
     const url = `${this.baseUrl}`;
     return this.copyService.getAllCopies(url, pageSize, page, search, showDeleted, showOnlyBorrowed);
   }

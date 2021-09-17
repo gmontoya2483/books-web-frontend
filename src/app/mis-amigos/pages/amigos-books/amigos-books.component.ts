@@ -21,6 +21,7 @@ export class AmigosBooksComponent implements OnInit {
   public currentLoanStatus = currentLoanStatusEnum;
   public pageSize = 25;
   public search = '';
+  public showOnlyBorrowedToMe = false;
   public pagination: Pagination = undefined;
 
   private _copies: Copy [] = [];
@@ -42,6 +43,7 @@ export class AmigosBooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.search = this.misAmigosCopyService.search;
+    this.showOnlyBorrowedToMe = this.misAmigosCopyService.showOnlyBorrowedToMe;
     this.pageSize = this.misAmigosCopyService.pageSize;
     this.pagination = this.misAmigosCopyService.pagination;
     if ( this.pagination) {
@@ -56,7 +58,9 @@ export class AmigosBooksComponent implements OnInit {
     if (this.search.length < 3){
       this.search =  '';
     }
-    this.misAmigosCopyService.getAllMyFollowingCopies(this.pageSize, page, this.search )
+
+    // TODO: Revisar para agregar el showonlyborrowedToMe
+    this.misAmigosCopyService.getAllMyFollowingCopies(this.pageSize, page, this.search, this.showOnlyBorrowedToMe )
       .subscribe((resp: { pagination: Pagination, copies: Copy [] }) => {
         this.pagination = resp.pagination;
         this._copies = resp.copies;
@@ -79,6 +83,7 @@ export class AmigosBooksComponent implements OnInit {
 
   showCopy(amigoId: string, copyId: string, bookId: string) {
     this.misAmigosCopyService.search = this.search;
+    this.misAmigosCopyService.showOnlyBorrowedToMe = this.showOnlyBorrowedToMe;
     this.misAmigosCopyService.pageSize = this.pageSize;
     this.misAmigosCopyService.pagination = this.pagination;
     this.router.navigate(['/world', 'amigos', amigoId, 'copies', 'view', copyId, 'books', bookId]).then();
@@ -113,9 +118,44 @@ export class AmigosBooksComponent implements OnInit {
     });
   }
 
+  returnCopy(copyId: string) {
+    this.copyLoanService.setCopyLoanStatusAsReturned(copyId).pipe(
+      catchError((err: any) => {
+        this.getCopies(this.pagination.currentPage);
+        return of(false);
+      })
+    ).subscribe(resp => {
+      this.getCopies(this.pagination.currentPage);
+    });
+  }
+
+  /************************************************************
+   Badges
+   *************************************************************/
+
   isStatus(currentStatus: currentLoanStatusEnum, isStatus: currentLoanStatusEnum){
     return (currentStatus === isStatus);
   }
+
+  isAvailable(copy: Copy): boolean {
+    if (!copy.currentLoan) {
+      return true;
+    } else {
+      return copy.currentLoan.user._id === this.meService.me._id;
+    }
+  }
+
+  isBorrowedToMe(copy: Copy): boolean {
+    if (!copy.currentLoan) {
+      return false;
+    } else {
+      return copy.currentLoan.user._id === this.meService.me._id;
+    }
+  }
+
+  /******************************************************
+   Acciones
+   ********************************************************/
 
   canBeCancelled(copy: Copy) {
     if (copy.currentLoan) {
@@ -126,6 +166,18 @@ export class AmigosBooksComponent implements OnInit {
       }
     }
   }
+
+
+  canBeReturned(copy: Copy) {
+    if (copy.currentLoan) {
+      if (copy.currentLoan.user._id !== this.meService.me._id){
+        return false;
+      } else {
+         return copy.currentLoan.status === this.currentLoanStatus.borrowed ||  copy.currentLoan.status === this.currentLoanStatus.claimed;
+      }
+    }
+  }
+
 
 
 }
