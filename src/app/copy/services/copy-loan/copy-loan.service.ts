@@ -78,5 +78,9 @@ export class CopyLoanService {
     return this.setCopyLoanStatus(copyId, currentLoanStatusEnum.returned);
   }
 
+  setCopyLoanStatusAsReturnedConfirmation(copyId: string){
+    return this.setCopyLoanStatus(copyId, currentLoanStatusEnum.returnedConfirmation);
+  }
+
 
 }

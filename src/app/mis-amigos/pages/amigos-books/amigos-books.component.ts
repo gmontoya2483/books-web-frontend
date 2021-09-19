@@ -59,7 +59,6 @@ export class AmigosBooksComponent implements OnInit {
       this.search =  '';
     }
 
-    // TODO: Revisar para agregar el showonlyborrowedToMe
     this.misAmigosCopyService.getAllMyFollowingCopies(this.pageSize, page, this.search, this.showOnlyBorrowedToMe )
       .subscribe((resp: { pagination: Pagination, copies: Copy [] }) => {
         this.pagination = resp.pagination;

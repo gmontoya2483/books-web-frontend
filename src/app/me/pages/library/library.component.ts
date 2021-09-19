@@ -173,6 +173,18 @@ export class LibraryComponent implements OnInit {
   }
 
 
+  setConfirmed(copyId: string) {
+    this.copyLoanService.setCopyLoanStatusAsReturnedConfirmation(copyId).pipe(
+      catchError((err: any) => {
+        this.getCopies(this.pagination.currentPage);
+        return of(false);
+      })
+    ).subscribe(resp => {
+      this.getCopies(this.pagination.currentPage);
+    });
+  }
+
+
 
 
 
@@ -205,6 +217,10 @@ export class LibraryComponent implements OnInit {
 
   canBeClaimed(copy: Copy): boolean {
     return copy.currentLoan && copy.currentLoan.status === this.currentLoanStatus.borrowed;
+  }
+
+  canBeConfirmed(copy: Copy): boolean {
+    return copy.currentLoan && copy.currentLoan.status === this.currentLoanStatus.returned;
   }
 
 
