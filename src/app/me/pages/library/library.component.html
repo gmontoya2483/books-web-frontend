@@ -110,42 +110,8 @@
                 <!-- Fin título del Libro -->
 
                 <!-- Statuses -->
-                <div *ngIf="copy.currentLoan" class="row">
-
-                  <!-- badge Solicitado en prestamo -->
-                  <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.requested)" class="col">
-                    <span class="badge badge-pill badge-warning">Solicitado en prestamo: {{copy.currentLoan.user.nombre | titlecase}} {{copy.currentLoan.user.apellido | titlecase}}</span>
-                  </div>
-                  <!-- fin badge Solicitado en prestamo -->
-
-                  <!-- badge Prestamo aceptado -->
-                  <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.accepted)" class="col">
-                    <span class="badge badge-pill badge-info">Prestamo aceptado: {{copy.currentLoan.user.nombre | titlecase}} {{copy.currentLoan.user.apellido | titlecase}}</span>
-                  </div>
-                  <!-- fin badge Prestamo aceptado -->
-
-                  <!-- badge Prestado -->
-                  <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.borrowed)" class="col">
-                    <span class="badge badge-pill badge-success">Prestado: {{copy.currentLoan.user.nombre | titlecase}} {{copy.currentLoan.user.apellido | titlecase}}</span>
-                  </div>
-                  <!-- fin badge Prestado -->
-
-                  <!-- badge Prestado -->
-                  <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.claimed)" class="col">
-                    <span class="badge badge-pill badge-danger">Devolución solicitada: {{copy.currentLoan.user.nombre | titlecase}} {{copy.currentLoan.user.apellido | titlecase}}</span>
-                  </div>
-                  <!-- fin badge Prestado -->
-
-                  <!-- badge devuelto -->
-                  <div *ngIf="isStatus(copy.currentLoan.status, currentLoanStatus.returned)" class="col">
-                    <span class="badge badge-pill badge-warning">Devuelto: {{copy.currentLoan.user.nombre | titlecase}} {{copy.currentLoan.user.apellido | titlecase}}</span>
-                  </div>
-                  <!-- fin badge devuleto -->
-
-
-
-                </div>
-                <!-- Fin statuses -->
+                <app-copy-current-loan-status-owner [currentLoan]="copy.currentLoan"></app-copy-current-loan-status-owner>
+                <!-- Fin Statuses -->
 
               </td>
               <!-- Fin Columna Título -->

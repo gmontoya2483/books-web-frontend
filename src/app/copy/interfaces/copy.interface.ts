@@ -9,6 +9,12 @@ export interface CopiesRootResponse {
   mensaje?: string | undefined;
 }
 
+export interface CopyRootResponse {
+  ok: boolean;
+  copy: Copy;
+  mensaje?: string | undefined;
+}
+
 export interface Copies {
   pagination: Pagination;
   copies: Copy[];
@@ -39,7 +45,7 @@ export enum currentLoanStatusEnum  {
   returnedConfirmation =  'Confirmado'
 }
 
-interface CurrentLoan {
+export interface CurrentLoan {
   user: ShortUser;
   status: currentLoanStatusEnum;
   dateTimeRequested: Date | null;

@@ -2,8 +2,8 @@
   <div class="row">
 
     <div class="col-6 mr-auto">
-      <p class="text-primary m-0 font-weight-bold">
-        Ver Libro</p>
+      <p *ngIf="!this.copyId" class="text-primary m-0 font-weight-bold">Ver Título</p>
+      <p *ngIf="this.copyId" class="text-primary m-0 font-weight-bold">Ver Ejemplar</p>
     </div>
 
     <div class="col-6 text-right">
@@ -17,48 +17,61 @@
   </div>
 </div>
 
-<div class="card-body mt-2">
-  <div *ngIf="book" class="row">
-    <div class="col-md-10 col-sm-12   mr-auto ml-auto card shadow">
+<app-copy-details *ngIf="this.copyId" [copyId]="this.copyId"></app-copy-details>
+<app-book-details *ngIf="!this.copyId" [bookId]="this.bookId"></app-book-details>
 
-      <div class="row">
+<!--<div class="card-body mt-2">-->
+<!--  <div *ngIf="book" class="row">-->
+<!--    <div class="col-md-10 col-sm-12   mr-auto ml-auto card shadow pb-4 px-4">-->
 
-        <div class="col-md-4">
-          <div class="row mt-3">
-            <div class="col">
-              <strong>Título: </strong> {{ book.title | titlecase}}
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col">
-              <strong>Autor principal: </strong> {{ book.author.lastName | titlecase }}, {{ book.author.name | titlecase }}
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col">
-              <strong>Género: </strong> {{ book.genre.name | titlecase }}
-            </div>
-          </div>
-        </div>
+<!--      <div class="row">-->
+
+<!--        <div class="col-md-4">-->
+<!--          <div class="row mt-3">-->
+<!--            <div class="col">-->
+<!--              <strong>Título: </strong> {{ book.title | titlecase}}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row mt-3">-->
+<!--            <div class="col">-->
+<!--              <strong>Autor principal: </strong> {{ book.author.lastName | titlecase }}, {{ book.author.name | titlecase }}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row mt-3">-->
+<!--            <div class="col">-->
+<!--              <strong>Género: </strong> {{ book.genre.name | titlecase }}-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div *ngIf="this.copyId" class="row mt-3">-->
+<!--            <div class="col">-->
+<!--              <app-copy-details [copyId]="this.copyId"></app-copy-details>-->
+<!--            </div>-->
+<!--          </div>-->
 
 
-        <div class="col-md-8">
-          <div class="row mt-3">
-            <div class="col"><strong>Descripción:</strong></div>
-          </div>
-          <div class="row mt-3">
-            <div class="col"><p>{{ book.description }}</p></div>
-          </div>
 
-          <div class="row mt-3 mb-5">
-            <div class="col text-right"><button type="button" class="btn btn-primary" (click)="addCopy(book._id)"><i class="fas fa-plus mr-1"></i>Agregar un Ejemplar a tu biblioteca</button></div>
 
-          </div>
+<!--        </div>-->
 
-        </div>
 
-      </div>
-    </div>
+<!--        <div class="col-md-8">-->
+<!--          <div class="row mt-3">-->
+<!--            <div class="col"><strong>Descripción:</strong></div>-->
+<!--          </div>-->
+<!--          <div class="row mt-3">-->
+<!--            <div class="col"><p>{{ book.description }}</p></div>-->
+<!--          </div>-->
 
-  </div>
-</div>
+<!--          <div *ngIf="!this.copyId" class="row mt-3 mb-5">-->
+<!--            <div class="col text-right"><button type="button" class="btn btn-primary" (click)="addCopy(book._id)"><i class="fas fa-plus mr-1"></i>Agregar un Ejemplar a tu biblioteca</button></div>-->
+
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->

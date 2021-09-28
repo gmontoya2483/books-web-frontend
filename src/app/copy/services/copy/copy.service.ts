@@ -3,19 +3,77 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AuthService} from '../../../auth/services/auth/auth.service';
 import {catchError, map} from 'rxjs/operators';
-import {CopiesRootResponse} from '../../interfaces/copy.interface';
+import {CopiesRootResponse, CopyRootResponse} from '../../interfaces/copy.interface';
 import Swal from 'sweetalert2';
 import {Observable, throwError} from 'rxjs';
+import {LoanHistoryRootResponse} from '../../interfaces/loanHistory.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CopyService {
 
-  private url = `${environment.booksServerUrl}/api/copy`;
+  private url = `${environment.booksServerUrl}/api/copies`;
 
   constructor(private http: HttpClient,
               private authService: AuthService ) { }
+
+
+  geSingleCopy(copyId: string) {
+
+    const copyUrl = `${this.url}/${copyId}`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token){
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.get(copyUrl, {headers}).pipe(
+      map( (resp: CopyRootResponse) => {
+        return resp.copy;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener informacion del ejemplar`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+
+    );
+
+  }
+
+
+  getCopyLoanHistory(copyId: string) {
+    const copyLoanHistoryUrl = `${this.url}/${copyId}/loanhistory`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token){
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.get(copyLoanHistoryUrl, {headers}).pipe(
+      map( (resp: LoanHistoryRootResponse) => {
+        return resp.loanHistory;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener el historial de prestamos`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+
+    );
+
+  }
 
 
 

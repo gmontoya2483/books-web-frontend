@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {AmigosFollowerComponent} from './pages/amigos-follower/amigos-follower.component';
 import {AmigosFollowingComponent} from './pages/amigos-following/amigos-following.component';
 import { AmigosBooksComponent } from './pages/amigos-books/amigos-books.component';
+import {CopyModule} from '../copy/copy.module';
 
 
 @NgModule({
@@ -17,11 +18,12 @@ import { AmigosBooksComponent } from './pages/amigos-books/amigos-books.componen
     AmigosFollowingComponent,
     AmigosBooksComponent
   ],
-  imports: [
-    CommonModule,
-    MisAmigosRoutingModule,
-    FormsModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        MisAmigosRoutingModule,
+        FormsModule,
+        SharedModule,
+        CopyModule
+    ]
 })
 export class MisAmigosModule { }

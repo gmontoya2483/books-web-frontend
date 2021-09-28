@@ -1,0 +1,33 @@
+<div *ngIf="currentLoan" class="row">
+
+      <!-- badge requerido  -->
+      <div *ngIf="isStatus(currentLoan.status, currentLoanStatus.requested)" class="col">
+        <span class="badge badge-pill badge-secondary">Solicitado en Préstamo</span>
+      </div>
+      <!-- fin badge requerido -->
+
+      <!-- badge prestamo aceptado  -->
+      <div *ngIf="isStatus(currentLoan.status, currentLoanStatus.accepted)" class="col">
+        <span class="badge badge-pill badge-info">Préstamo Aceptado</span>
+      </div>
+      <!-- fin badge prestamo Aceptado -->
+
+      <!-- badge prestado  -->
+      <div *ngIf="isStatus(currentLoan.status, currentLoanStatus.borrowed)" class="col">
+        <span class="badge badge-pill badge-success">Prestado</span>
+      </div>
+      <!-- fin badge prestado -->
+
+      <!-- badge reclamado  -->
+      <div *ngIf="isStatus(currentLoan.status, currentLoanStatus.claimed)" class="col">
+        <span class="badge badge-pill badge-warning">Devolución solicitada</span>
+      </div>
+      <!-- fin badge reclamado -->
+
+      <!-- badge Devuelto  -->
+      <div *ngIf="isStatus(currentLoan.status, currentLoanStatus.returned)" class="col">
+        <span class="badge badge-pill badge-primary">Devuelto</span>
+      </div>
+      <!-- fin badge Devuelto -->
+
+</div>

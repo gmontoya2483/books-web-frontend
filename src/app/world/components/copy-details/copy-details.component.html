@@ -1,0 +1,77 @@
+<div class="card-body mt-2">
+  <div *ngIf="copy" class="row">
+    <div class="col-md-10 col-sm-12   mr-auto ml-auto card shadow pb-4 px-4">
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="row mt-3">
+            <div class="col">
+              <strong>Título: </strong> {{ copy.book.title | titlecase}}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <strong>Autor principal: </strong> {{ copy.book.author.lastName | titlecase }}, {{ copy.book.author.name | titlecase }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <strong>Género: </strong> {{ copy.book.genre.name | titlecase }}
+            </div>
+          </div>
+
+          <div *ngIf="!isCopyOwner()" class="row mt-3">
+            <div class="col">
+              <strong>Dueño: </strong> {{ copy.owner.nombre | titlecase }} {{ copy.owner.apellido | titlecase }}
+              <div *ngIf="isCopyRequester() && copy.currentLoan.status !== currentLoanStatus.requested">
+                <strong>Email: </strong> {{ copy.owner.email }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col">
+              <strong>Estado: </strong>
+                <app-copy-current-loan-status-owner *ngIf="isCopyOwner()" [currentLoan]="copy.currentLoan"></app-copy-current-loan-status-owner>
+                <app-copy-current-loan-status-requester *ngIf="isCopyRequester()" [currentLoan]="copy.currentLoan"></app-copy-current-loan-status-requester>
+                <app-copy-current-loan-status *ngIf="!isCopyRequester() && !isCopyOwner()" [currentLoan]="copy.currentLoan"></app-copy-current-loan-status>
+            </div>
+          </div>
+
+          <div *ngIf="isCopyOwner() && copy.currentLoan" class="row mt-3">
+            <div class="col">
+              <strong>Email: </strong> {{ copy.currentLoan.user.email }}
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <div class="col-md-8">
+          <div class="row mt-3">
+            <div class="col"><strong>Descripción:</strong></div>
+          </div>
+          <div class="row mt-3">
+            <div class="col"><p>{{ copy.book.description }}</p></div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+      <div *ngIf="isCopyOwner()" class="row mt-4">
+        <div class="col">
+          <app-copy-loan-history [copyId]="copyId"></app-copy-loan-history>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+

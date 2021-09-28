@@ -12,25 +12,34 @@ import { ViewBookComponent } from './pages/view-book/view-book.component';
 import {SharedModule} from '../shared/shared.module';
 import { ViewAuthorComponent } from './pages/view-author/view-author.component';
 import { AuthorBooksComponent } from './components/author-books/author-books.component';
+import { CopyDetailsComponent } from './components/copy-details/copy-details.component';
+import { BookDetailsComponent } from './components/book-details/book-details.component';
+import {CopyModule} from '../copy/copy.module';
 
 
 @NgModule({
-  declarations: [
-    WorldComponent,
-    BooksComponent,
-    AuthorsComponent,
-    NewAuthorComponent,
-    NewBookComponent,
-    ViewBookComponent,
-    ViewAuthorComponent,
-    AuthorBooksComponent
-  ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        WorldRoutingModule,
-        SharedModule
-    ]
+    declarations: [
+        WorldComponent,
+        BooksComponent,
+        AuthorsComponent,
+        NewAuthorComponent,
+        NewBookComponent,
+        ViewBookComponent,
+        ViewAuthorComponent,
+        AuthorBooksComponent,
+        CopyDetailsComponent,
+        BookDetailsComponent
+    ],
+    exports: [
+
+    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    WorldRoutingModule,
+    SharedModule,
+    CopyModule
+  ]
 })
 export class WorldModule { }

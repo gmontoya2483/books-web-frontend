@@ -12,20 +12,19 @@ import {MeCopyService} from '../../../copy/services/me-copy/me-copy.service';
 })
 export class ViewBookComponent implements OnInit {
 
-  book: Book;
-  private bookId: string;
+  // book: Book;
+  public bookId: string;
   private authorId: string;
-  private copyId: string;
+  public copyId: string;
   private communityId: string;
-  private userId: string;
+  public userId: string;
   private followingId: string;
   private followerId: string;
   private amigoId: string;
 
   constructor(private router: Router,
-              private booksService: BooksService,
-              private activatedRoute: ActivatedRoute,
-              private meCopyService: MeCopyService) { }
+              private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
@@ -36,7 +35,7 @@ export class ViewBookComponent implements OnInit {
     this.followingId = this.activatedRoute.snapshot.paramMap.get('followingId');
     this.followerId = this.activatedRoute.snapshot.paramMap.get('followerId');
     this.amigoId = this.activatedRoute.snapshot.paramMap.get('amigoId');
-    this.getBook();
+    // this.getBook();
   }
 
 
@@ -75,17 +74,17 @@ export class ViewBookComponent implements OnInit {
     return this.router.navigate(['/world', 'books']).then();
   }
 
-  private getBook() {
-    this.booksService.getSingleBook(this.bookId).subscribe(
-      (resp: Book) => {
-        this.book = resp;
-      }
-    );
-
-  }
-
-
-  addCopy( bookId: string ) {
-    this.meCopyService.addCopy( bookId ).subscribe();
-  }
+  // private getBook() {
+  //   this.booksService.getSingleBook(this.bookId).subscribe(
+  //     (resp: Book) => {
+  //       this.book = resp;
+  //     }
+  //   );
+  //
+  // }
+  //
+  //
+  // addCopy( bookId: string ) {
+  //   this.meCopyService.addCopy( bookId ).subscribe();
+  // }
 }

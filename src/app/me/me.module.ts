@@ -9,6 +9,7 @@ import {UserSettingsComponent} from './components/user-settings/user-settings.co
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import { LibraryComponent } from './pages/library/library.component';
+import {CopyModule} from '../copy/copy.module';
 
 
 
@@ -20,12 +21,13 @@ import { LibraryComponent } from './pages/library/library.component';
     UserSettingsComponent,
     LibraryComponent
   ],
-    imports: [
-        CommonModule,
-        MeRoutingModule,
-        ReactiveFormsModule,
-        SharedModule,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    MeRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+    FormsModule,
+    CopyModule
+  ]
 })
 export class MeModule { }

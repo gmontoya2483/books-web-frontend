@@ -132,25 +132,15 @@ export class AmigosBooksComponent implements OnInit {
    Badges
    *************************************************************/
 
-  isStatus(currentStatus: currentLoanStatusEnum, isStatus: currentLoanStatusEnum){
-    return (currentStatus === isStatus);
+  isCopyOwner(copy: Copy) {
+    return copy.owner._id === this.meService.me._id;
   }
 
-  isAvailable(copy: Copy): boolean {
-    if (!copy.currentLoan) {
-      return true;
-    } else {
-      return copy.currentLoan.user._id === this.meService.me._id;
-    }
+  isCopyRequester(copy: Copy) {
+    return copy.currentLoan && copy.currentLoan.user._id === this.meService.me._id;
   }
 
-  isBorrowedToMe(copy: Copy): boolean {
-    if (!copy.currentLoan) {
-      return false;
-    } else {
-      return copy.currentLoan.user._id === this.meService.me._id;
-    }
-  }
+
 
   /******************************************************
    Acciones
