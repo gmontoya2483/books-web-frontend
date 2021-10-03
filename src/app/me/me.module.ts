@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import { LibraryComponent } from './pages/library/library.component';
 import {CopyModule} from '../copy/copy.module';
+import { RequestedLoanHistoryComponent } from './pages/requested-loan-history/requested-loan-history.component';
 
 
 
@@ -19,7 +20,8 @@ import {CopyModule} from '../copy/copy.module';
     CommunityComponent,
     PhotoComponent,
     UserSettingsComponent,
-    LibraryComponent
+    LibraryComponent,
+    RequestedLoanHistoryComponent
   ],
   imports: [
     CommonModule,

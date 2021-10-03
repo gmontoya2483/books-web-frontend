@@ -12,7 +12,7 @@ export class SideNavBarService {
       path: '/world',
       icon: 'fas fa-globe-americas',
       children: [
-        { description: 'Todos los libros', path: '/world/books'},
+        { description: 'Todos los Títulos', path: '/world/books'},
         { description: 'Todos los Autores', path: '/world/authors'}
       ]
     }
@@ -34,8 +34,7 @@ export class SideNavBarService {
       icon: 'fas fa-users',
       children: [
         { description: 'Siguiendo', path: '/amigos/following'},
-        { description: 'Te Siguen', path: '/amigos/followers'},
-        { description: 'Ejemplares', path: '/amigos/following/copies'}
+        { description: 'Me Siguen', path: '/amigos/followers'}
       ]
     }
   ];

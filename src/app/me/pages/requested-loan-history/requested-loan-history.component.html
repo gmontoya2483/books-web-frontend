@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+
+    <div class="col">
+
+      <div class="card-header py-3">
+        <div class="row">
+          <div class="col-6 mr-auto"><p class="text-primary m-0 font-weight-bold">Historial de últimos préstamos recibidos</p></div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+
+
+          <div class="table-responsive table mt-2"  role="grid" aria-describedby="dataTable_info">
+            <table class="table my-0" id="dataTable">
+              <thead>
+              <tr class="d-flex">
+                <th class="col">Título</th>
+                <th class="col">Dueño</th>
+                <th class="col">Fecha del Préstamo</th>
+                <th class="col">Fecha del Reclamado</th>
+                <th class="col">Fecha de Devolución</th>
+                <th class="col">Fecha de Confirmación</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr *ngFor="let loan of loanHistory" class="d-flex">
+                <td class="col">{{ loan.copyId.book.title | titlecase}}</td>
+                <td class="col">{{ loan.copyId.owner.nombre | titlecase}} {{loan.copyId.owner.apellido | titlecase}}</td>
+                <td class="col">{{ loan.dateTimeBorrowed | date: 'shortDate' }}</td>
+                <td class="col">{{ loan.dateTimeClaimed | date: 'shortDate' }}</td>
+                <td class="col">{{ loan.dateTimeReturned | date: 'shortDate' }}</td>
+                <td class="col">{{ loan.dateTimeReturnedConfirmation | date: 'shortDate' }}</td>
+              </tr>
+
+
+              </tbody>
+
+
+
+            </table>
+          </div>
+
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>

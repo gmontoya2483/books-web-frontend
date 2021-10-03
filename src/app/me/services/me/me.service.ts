@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Usuario} from '../../../models/ususario.model';
 import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
@@ -9,6 +9,7 @@ import {Observable, throwError} from 'rxjs';
 import {AuthService} from '../../../auth/services/auth/auth.service';
 import {CountriesService} from '../../../shared/services/countries/countries.service';
 import {FileUploadService} from '../../../services/file-upload/file-upload.service';
+import {LoanHistoryRootResponse, MeLoanHistoryRootResponse} from '../../../copy/interfaces/loanHistory.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -377,5 +378,34 @@ export class MeService {
     );
 
   }
+
+  getMyLoanHistory() {
+    const url = `${this.url}/loanhistory`;
+
+    // Obtener el token para posarlo en el header
+    const token = this.authService.getToken();
+    if (!token){
+      return null;
+    }
+    const headers = new HttpHeaders().set('x-auth-token', token);
+
+    return this.http.get(url, {headers}).pipe(
+      map( (resp: MeLoanHistoryRootResponse) => {
+        return resp.loanHistory;
+      }),
+      catchError((err: any) => {
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo obtener el historial de prestamos`,
+          icon: 'error'
+        }).then();
+        return throwError(err);
+      })
+
+    );
+
+  }
+
+
 
 }
