@@ -1,0 +1,156 @@
+<div class="card shadow mb-3">
+  <div class="card-header py-3">
+    <h4 class="text-primary m-0 font-weight-bold">Mi Biblioteca</h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-8"><strong>Total de Libros:</strong></div>
+      <div class="col-4 text-right">{{ myCopiesStatistics.totalCopies.total | number }}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-8"><strong>Libros activos:</strong></div>
+      <div class="col-4 text-right">{{ myCopiesStatistics.totalCopies.activeCopies | number }}</div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-8"><strong>Libros eliminados:</strong></div>
+      <div class="col-4 text-right">{{  myCopiesStatistics.totalCopies.deletedCopies | number }}</div>
+    </div>
+
+    <hr>
+
+    <!-- Seccion CurrentLoans-->
+    <div class="row">
+      <div class="col">
+
+        <div class="row mb-2">
+          <div class="col"><h5>Prestamos Actuales</h5></div>
+        </div>
+
+
+
+        <!-- Títulos por prestamo actual-->
+        <div class="row">
+          <div class="col">
+
+
+            <div class="row">
+              <div class="col">
+
+                <div *ngFor="let status of myCopiesStatistics.copies.currentLoans.copiesByCurrentLoanStatus" class="row">
+                  <div *ngIf="!status._id" class="col-8">Disponible:</div>
+                  <div *ngIf="status._id" class="col-8">{{status._id | titlecase}}:</div>
+                  <div class="col-4 text-right">{{status.totalCopies | number}}</div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- Fin titulos por autor -->
+      </div>
+    </div>
+    <!-- Fin seccion autores -->
+
+    <hr>
+
+
+
+
+    <!-- Seccion Autores-->
+    <div class="row">
+      <div class="col">
+
+        <div class="row mb-2">
+          <div class="col"><h5>Autores</h5></div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-8"><strong>Total Autores:</strong></div>
+          <div class="col-4 text-right">{{ myCopiesStatistics.copies.authors.total | number }}</div>
+        </div>
+
+        <!-- Títulos por Autor-->
+        <div class="row">
+          <div class="col">
+
+            <div class="row">
+              <div class="col">
+                <h6><strong>Libros por Autor</strong></h6>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col">
+
+                <div *ngFor="let author of myCopiesStatistics.copies.authors.copiesByAuthor" class="row">
+                  <div class="col-8">{{author._id | titlecase}}:</div>
+                  <div class="col-4 text-right">{{author.totalCopies | number}}</div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- Fin titulos por autor -->
+      </div>
+    </div>
+    <!-- Fin seccion autores -->
+
+    <hr>
+
+    <!-- Seccion Géneros-->
+    <div class="row">
+      <div class="col">
+
+        <div class="row mb-2">
+          <div class="col"><h5>Géneros</h5></div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-8"><strong>Total Géneros:</strong></div>
+          <div class="col-4 text-right">{{ myCopiesStatistics.copies.genres.total | number }}</div>
+        </div>
+
+        <!-- Títulos por Género-->
+        <div class="row">
+          <div class="col">
+
+            <div class="row">
+              <div class="col">
+                <h6><strong>Libros por Género</strong></h6>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col">
+
+                <div *ngFor="let genre of myCopiesStatistics.copies.genres.copiesByGenre" class="row">
+                  <div class="col-8">{{genre._id | titlecase}}:</div>
+                  <div class="col-4 text-right">{{genre.totalCopies | number}}</div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- Fin titulos por género -->
+
+      </div>
+    </div>
+    <!-- Fin seccion genre -->
+
+
+
+  </div>
+</div>

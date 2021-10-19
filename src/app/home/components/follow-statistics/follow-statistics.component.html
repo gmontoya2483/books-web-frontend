@@ -1,0 +1,66 @@
+<div class="card shadow mb-3">
+  <div class="card-header py-3">
+    <h4 class="text-primary m-0 font-weight-bold">Mis Amigos</h4>
+  </div>
+  <div class="card-body">
+
+
+
+
+    <!-- Seccion following-->
+    <div class="row">
+      <div class="col">
+
+        <div class="row mb-2">
+          <div class="col"><h5>Siguiendo</h5></div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-8"><strong>Siguiendo:</strong></div>
+          <div class="col-4 text-right">{{ followStatistics.following.totalFollowing | number }}</div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-8"><strong>Pendiente Confirmación:</strong></div>
+          <div class="col-4 text-right">{{ followStatistics.following.totalFollowingRequest | number }}</div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Fin seccion Following -->
+
+
+    <hr>
+
+
+    <!-- Seccion followers-->
+    <div class="row">
+      <div class="col">
+
+        <div class="row mb-2">
+          <div class="col"><h5>Me Siguen</h5></div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-8"><strong>Me siguen:</strong></div>
+          <div class="col-4 text-right">{{ followStatistics.followers.totalFollowers | number }}</div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-8"><strong>Pendiente Confirmación:</strong></div>
+          <div class="col-4 text-right">{{ followStatistics.followers.totalFollowersRequest | number }}</div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Fin seccion followers -->
+
+
+
+
+
+  </div>
+
+
+
+</div>
