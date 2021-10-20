@@ -57,6 +57,7 @@ export interface CopiesGenres {
 export interface FollowStatistics {
   followers: Followers;
   following: Following;
+  requestedLoans: Loans;
 }
 
 export interface Followers {
@@ -69,6 +70,16 @@ export interface Following {
   totalFollowingRequest: number;
 }
 
+export interface Loans {
+  totalLoanHistory: number;
+  currentLoans: CurrentLoans;
+}
+
+export interface CurrentLoans {
+  total: number;
+  copiesByCurrentLoanStatus: CopiesBy[];
+}
+
 export interface MyCopiesStatistics {
   totalCopies: TotalCopies;
   copies: MyCopiesStatisticsCopies;
@@ -77,12 +88,7 @@ export interface MyCopiesStatistics {
 export interface MyCopiesStatisticsCopies {
   genres: CopiesGenres;
   authors: CopiesAuthors;
-  currentLoans: CurrentLoans;
-}
-
-export interface CurrentLoans {
-  total: number;
-  copiesByCurrentLoanStatus: CopiesBy[];
+  loans: Loans;
 }
 
 export interface TotalCopies {

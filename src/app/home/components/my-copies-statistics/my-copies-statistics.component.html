@@ -21,12 +21,17 @@
 
     <hr>
 
-    <!-- Seccion CurrentLoans-->
+    <!-- Seccion Prestamos-->
     <div class="row">
       <div class="col">
 
         <div class="row mb-2">
-          <div class="col"><h5>Prestamos Actuales</h5></div>
+          <div class="col"><h5>Prestamos otorgados</h5></div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-8"><h6><strong>Históricos:</strong></h6></div>
+          <div class="col-4 text-right">{{ myCopiesStatistics.copies.loans.totalLoanHistory | number }}</div>
         </div>
 
 
@@ -34,27 +39,36 @@
         <!-- Títulos por prestamo actual-->
         <div class="row">
           <div class="col">
-
-
+            <div class="row mb-2">
+              <div class="col"><h6><strong>Actuales</strong></h6></div>
+            </div>
             <div class="row">
               <div class="col">
 
-                <div *ngFor="let status of myCopiesStatistics.copies.currentLoans.copiesByCurrentLoanStatus" class="row">
-                  <div *ngIf="!status._id" class="col-8">Disponible:</div>
-                  <div *ngIf="status._id" class="col-8">{{status._id | titlecase}}:</div>
-                  <div class="col-4 text-right">{{status.totalCopies | number}}</div>
-                </div>
 
+                <div class="row">
+                  <div class="col">
+
+                    <div *ngFor="let status of myCopiesStatistics.copies.loans.currentLoans.copiesByCurrentLoanStatus" class="row">
+                      <div *ngIf="!status._id" class="col-8">Disponible:</div>
+                      <div *ngIf="status._id" class="col-8">{{status._id | titlecase}}:</div>
+                      <div class="col-4 text-right">{{status.totalCopies | number}}</div>
+                    </div>
+
+
+                  </div>
+                </div>
 
               </div>
             </div>
 
           </div>
         </div>
-        <!-- Fin titulos por autor -->
+        <!-- Fin Títulos por prestamo actual -->
+
       </div>
     </div>
-    <!-- Fin seccion autores -->
+    <!-- Fin seccion Prestamos -->
 
     <hr>
 
