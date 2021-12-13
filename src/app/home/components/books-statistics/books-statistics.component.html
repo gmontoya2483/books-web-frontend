@@ -3,7 +3,7 @@
   <div class="card-header py-3">
     <h4 class="text-primary m-0 font-weight-bold">Títulos</h4>
   </div>
-  <div class="card-body">
+  <div *ngIf="booksStatistics" class="card-body">
     <div class="row">
       <div class="col-8"><strong>Total de Títulos:</strong></div>
       <div class="col-4 text-right">{{ booksStatistics.totalBooks | number }}</div>
